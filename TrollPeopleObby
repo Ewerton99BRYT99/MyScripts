@@ -1,0 +1,103 @@
+getgenv().SecureMode = true
+local ArrayField = loadstring(game:HttpGet('https://raw.githubusercontent.com/UI-Interface/ArrayField/main/Source.lua'))()
+local Window = ArrayField:CreateWindow({
+   Name = "Trolls Hub",
+   LoadingTitle = "ArrayField Interface Suite",
+   LoadingSubtitle = "by Arrays",
+   ConfigurationSaving = {
+      Enabled = true,
+      FolderName = nil, -- Create a custom folder for your hub/game
+      FileName = "ArrayField"
+   },
+   Discord = {
+      Enabled = false,
+      Invite = "noinvitelink", -- The Discord invite code, do not include discord.gg/. E.g. discord.gg/ABCD would be ABCD
+      RememberJoins = true -- Set this to false to make them join the discord every time they load it up
+   },
+   KeySystem = false, -- Set this to true to use our key system
+   KeySettings = {
+      Title = "Untitled",
+      Subtitle = "Key System",
+      Note = "No method of obtaining the key is provided",
+      FileName = "Key", -- It is recommended to use something unique as other scripts using ArrayField may overwrite your key file
+      SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+      GrabKeyFromSite = false, -- If this is true, set Key below to the RAW site you would like ArrayField to get the key from
+      Actions = {
+            [1] = {
+                Text = 'Click here to copy the key link <--',
+                OnPress = function()
+                    print('Pressed')
+                end,
+                }
+            },
+      Key = {"Hello"} -- List of keys that will be accepted by the system, can be RAW file links (pastebin, github etc) or simple strings ("hello","key22")
+   }
+})
+
+-- Variables & Functions
+local Players = game:GetService("Players")
+local localPlayer = Players.LocalPlayer
+local char = localPlayer.Character or localPlayer.CharacterAdded:Wait()
+local hrp = char:WaitForChild("HumanoidRootPart")
+
+getgenv().SlapLoop = false
+
+task.spawn(function()
+    while true do
+        if getgenv().SlapLoop then
+            for _, targetPlayer in pairs(Players:GetPlayers()) do
+                if targetPlayer ~= localPlayer and targetPlayer.Character and targetPlayer.Character:FindFirstChild("HumanoidRootPart") then
+                    local direction = (targetPlayer.Character.HumanoidRootPart.Position - hrp.Position).Unit
+
+                    local args = {
+                        [1] = "slash",
+                        [2] = targetPlayer.Character,
+                        [3] = direction
+                    }
+
+                    if localPlayer.Character:FindFirstChild("SlapTool") then
+                        localPlayer.Character.SlapTool.Event:FireServer(unpack(args))
+                    end
+                end
+            end
+        end
+        task.wait(0.1)
+    end
+end)
+
+
+local MainTab = Window:CreateTab("Main", 4483362458) -- Title, Image
+
+local MainSection = MainTab:CreateSection("Section Example",false)
+local Toggle = MainTab:CreateToggle({
+   Name = "AutoSlap All",
+   CurrentValue = false,
+   Flag = "Toggle1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+   Callback = function(Value)
+   getgenv().SlapLoop = Value
+   end,
+})
+
+local Button = MainTab:CreateButton({
+   Name = "Claim Grapple Hook",
+   Interact = 'Click',
+   Callback = function()
+   local args = {
+    [1] = "GrappleHook"
+}
+
+game:GetService("ReplicatedStorage").ClaimReward:FireServer(unpack(args))
+   end,
+})
+
+local Button = MainTab:CreateButton({
+   Name = "Claim Slap Tool",
+   Interact = 'Click',
+   Callback = function()
+   local args = {
+    [1] = "SlapTool"
+}
+
+game:GetService("ReplicatedStorage").ClaimReward:FireServer(unpack(args))
+   end,
+})
