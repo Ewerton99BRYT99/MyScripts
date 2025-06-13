@@ -471,7 +471,7 @@ function reloadESP()
 end
 
 function GetBeast()
-	local allPlayers = Players:GetPlayers()
+	local allPlayers = game:GetService("Players"):GetPlayers()
 	for _, plr in ipairs(allPlayers) do
 		local character = plr.Character
 		if plr:FindFirstChild("TempPlayerStatsModule") and
