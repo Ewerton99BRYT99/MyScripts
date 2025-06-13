@@ -471,16 +471,24 @@ function reloadESP()
 end
 
 function GetBeast()
-	local allPlayers = game:GetService("Players"):GetPlayers()
+	local PlayersService = game:FindFirstChildOfClass("Players")
+	if not PlayersService then
+		warn("Players service not found!")
+		return nil
+	end
+
+	local allPlayers = PlayersService:GetPlayers()
 	for _, plr in ipairs(allPlayers) do
 		local character = plr.Character
-		if plr:FindFirstChild("TempPlayerStatsModule") and
-			plr.TempPlayerStatsModule:FindFirstChild("IsBeast") and
-			plr.TempPlayerStatsModule.IsBeast.Value == true or
-			(character and character:FindFirstChild("BeastPowers")) then
+		local stats = plr:FindFirstChild("TempPlayerStatsModule")
+		local isBeast = stats and stats:FindFirstChild("IsBeast")
+
+		if (isBeast and isBeast.Value == true) or (character and character:FindFirstChild("BeastPowers")) then
 			return plr
 		end
 	end
+
+	return nil -- no beast found
 end
 
 function reloadPCESP()
