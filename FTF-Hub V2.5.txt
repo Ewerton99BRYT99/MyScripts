@@ -324,18 +324,17 @@ end
     	end
 })
 
-local Input = TTab:CreateInput({
-	Name = "Player Full UserName",
-	Description = nil,
-	PlaceholderText = "Full UserName",
-	CurrentValue = "Hello", -- the current text
-	Numeric = false, -- When true, the user may only type numbers in the box (Example walkspeed)
-	MaxCharacters = nil, -- if a number, the textbox length cannot exceed the number
-	Enter = false, -- When true, the callback will only be executed when the user presses enter.
-    	Callback = function(Text)
-       	 _G.UserInput = Text
-    	end
-}, "Input") -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+local Dropdown = TTab:CreateDropdown({
+	Name = "Players List",
+    	Description = nil,
+	Options = {"Option 1","Option 2"},
+    	CurrentOption = {"Option 1"},
+    	MultipleOptions = true,
+    	SpecialType = Player,
+    	Callback = function(Options)
+     	 _G.UserInput = Options
+	end
+}, "Dropdown") -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
 local Toggle = TTab:CreateToggle({
 	Name = "Slow Beast",
 	Description = nil,
