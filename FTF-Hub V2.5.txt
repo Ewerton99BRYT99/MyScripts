@@ -1,0 +1,847 @@
+-- loadstring(game:HttpGet("https://raw.githubusercontent.com/Ewerton99BRYT99/MyScripts/refs/heads/main/FTF-Hub%20V2.5.txt",true))()
+local Luna = loadstring(game:HttpGet("https://raw.githubusercontent.com/Nebula-Softworks/Luna-Interface-Suite/refs/heads/main/source.lua", true))()
+local Window = Luna:CreateWindow({
+	Name = "FTF-Hub | "..game:GetService('MarketplaceService'):GetProductInfo(game.PlaceId).Name, -- This Is Title Of Your Window
+	Subtitle = nil, -- A Gray Subtitle next To the main title.
+	LogoID = "82795327169782", -- The Asset ID of your logo. Set to nil if you do not have a logo for Luna to use.
+	LoadingEnabled = true, -- Whether to enable the loading animation. Set to false if you do not want the loading screen or have your own custom one.
+	LoadingTitle = "Luna Ui", -- Header for loading screen
+	LoadingSubtitle = "Script By Ewerton99", -- Subtitle for loading screen
+
+	ConfigSettings = {
+		RootFolder = nil, -- The Root Folder Is Only If You Have A Hub With Multiple Game Scripts and u may remove it. DO NOT ADD A SLASH
+		ConfigFolder = "FTF-Hub" -- The Name Of The Folder Where Luna Will Store Configs For This Script. DO NOT ADD A SLASH
+	},
+
+	KeySystem = false, -- As Of Beta 6, Luna Has officially Implemented A Key System!
+	KeySettings = {
+		Title = "Luna Example Key",
+		Subtitle = "Key System",
+		Note = "Best Key System Ever! Also, Please Use A HWID Keysystem like Pelican, Luarmor etc. that provide key strings based on your HWID since putting a simple string is very easy to bypass",
+		SaveInRoot = false, -- Enabling will save the key in your RootFolder (YOU MUST HAVE ONE BEFORE ENABLING THIS OPTION)
+		SaveKey = true, -- The user's key will be saved, but if you change the key, they will be unable to use your script
+		Key = {"Example Key"}, -- List of keys that will be accepted by the system, please use a system like Pelican or Luarmor that provide key strings based on your HWID since putting a simple string is very easy to bypass
+		SecondAction = {
+			Enabled = true, -- Set to false if you do not want a second action,
+			Type = "Link", -- Link / Discord.
+			Parameter = "" -- If Type is Discord, then put your invite link (DO NOT PUT DISCORD.GG/). Else, put the full link of your key system here.
+		}
+	}
+})
+
+Luna:Notification({ 
+	Title = "⚠️Bugs⚠️",
+	Icon = "notifications_active",
+	ImageSource = "Material",
+	Content = "If You Find Any Bugs/Errors Contact me On Youtube"
+})
+
+-- Variables
+
+local podstoggle = false
+local pctoggle = false
+local pctoggle2 = false
+local playertoggle = false
+local bestpctoggle = false
+local exitstoggle = false
+local nametoggle = false
+local outlinetoggle = false
+
+local neverfailtoggle = false
+local neverfailhack = false
+local autointeracttoggle = false
+local autoplaytoggle = false
+local slowbeast = false
+local removerope = false
+local forceability = false
+
+local beastcolor = Color3.fromRGB(255, 0, 0)
+local beastoutline = Color3.fromRGB(255, 200, 200)
+
+local survivorcolor = Color3.fromRGB(0, 255, 0)
+local survivoroutline = Color3.fromRGB(200, 255, 200)
+
+local UserInput = "Hello"
+
+local Players = game:GetService("Players")
+local PlayerNames = {}
+
+local function getPlayerNames()
+	local names = {}
+	for _, player in ipairs(Players:GetPlayers()) do
+		table.insert(names, player.Name)
+	end
+	return names
+end
+
+PlayerNames = getPlayerNames()
+
+-- Ui
+local HTab = Window:CreateTab({
+	Name = "Home",
+	Icon = "house",
+	ImageSource = "Material",
+	ShowTitle = true -- This will determine whether the big header text in the tab will show
+})
+local ETab = Window:CreateTab({
+	Name = "ESP",
+	Icon = "visibility",
+	ImageSource = "Material",
+	ShowTitle = true -- This will determine whether the big header text in the tab will show
+})
+local NBTab = Window:CreateTab({
+	Name = "Non-Beast",
+	Icon = "groups",
+	ImageSource = "Material",
+	ShowTitle = true -- This will determine whether the big header text in the tab will show
+})
+local BTab = Window:CreateTab({
+	Name = "Beast",
+	Icon = "person",
+	ImageSource = "Material",
+	ShowTitle = true -- This will determine whether the big header text in the tab will show
+})
+local TTab = Window:CreateTab({
+	Name = "Trolling",
+	Icon = "local_fire_department",
+	ImageSource = "Material",
+	ShowTitle = true -- This will determine whether the big header text in the tab will show
+})
+local PTab = Window:CreateTab({
+	Name = "Player",
+	Icon = "settings",
+	ImageSource = "Material",
+	ShowTitle = true -- This will determine whether the big header text in the tab will show
+})
+
+-- Sections & Labels
+local Label = HTab:CreateLabel({
+	Text = "Thanks For Using FTF-Hub",
+	Style = 1 -- Luna Labels Have 3 Styles : A Basic Label, A Green Information Label and A Red Warning Label. Look At The Following Image For More Details
+})
+local Label2 = HTab:CreateLabel({
+	Text = "User | "..game.Players.LocalPlayer.Name,
+	Style = 1 -- Luna Labels Have 3 Styles : A Basic Label, A Green Information Label and A Red Warning Label. Look At The Following Image For More Details
+})
+local Label3 = HTab:CreateLabel({
+	Text = "DisplayName | "..game.Players.LocalPlayer.DisplayName,
+	Style = 1 -- Luna Labels Have 3 Styles : A Basic Label, A Green Information Label and A Red Warning Label. Look At The Following Image For More Details
+})
+HTab:CreateSection("Credits")
+local Label4 = HTab:CreateLabel({
+	Text = "Normal ESP | Some of Non-Beast -- from Ftfhax",
+	Style = 1 -- Luna Labels Have 3 Styles : A Basic Label, A Green Information Label and A Red Warning Label. Look At The Following Image For More Details
+})
+local Label5 = HTab:CreateLabel({
+	Text = "Outline & Name & PC V2 ESP | NeverFailHack V2  -- By Ewerton99",
+	Style = 1 -- Luna Labels Have 3 Styles : A Basic Label, A Green Information Label and A Red Warning Label. Look At The Following Image For More Details
+})
+local Label6 = HTab:CreateLabel({
+	Text = "Trolling Features -- from Olympia",
+	Style = 1 -- Luna Labels Have 3 Styles : A Basic Label, A Green Information Label and A Red Warning Label. Look At The Following Image For More Details
+})
+local Label7 = HTab:CreateLabel({
+	Text = "Beast Features -- From Raisincains",
+	Style = 1 -- Luna Labels Have 3 Styles : A Basic Label, A Green Information Label and A Red Warning Label. Look At The Following Image For More Details
+})
+
+HTab:CreateSection("Changelogs")
+local Label8 = HTab:CreateLabel({
+	Text = "V1 | Start Of The Script",
+	Style = 1 -- Luna Labels Have 3 Styles : A Basic Label, A Green Information Label and A Red Warning Label. Look At The Following Image For More Details
+})
+local Label8 = HTab:CreateLabel({
+	Text = "V1.5 | Added Tracers Esp | Added Outline Esp | Others Scripts | And More",
+	Style = 1 -- Luna Labels Have 3 Styles : A Basic Label, A Green Information Label and A Red Warning Label. Look At The Following Image For More Details
+})
+local Label9 = HTab:CreateLabel({
+	Text = "V2 | Removed Tracer Esp | Outline Esp Bugged | Remake Of Choose Device Gui",
+	Style = 1 -- Luna Labels Have 3 Styles : A Basic Label, A Green Information Label and A Red Warning Label. Look At The Following Image For More Details
+})
+local Label10 = HTab:CreateLabel({
+	Text = "V2.5 (Current) | Changed The Ui To Luna Ui | Added Trolling Tab | Added NoFailHack V2 | Fixed Outline Esp Not Being Able to Disable | Removed Choose Device Gui | And More",
+	Style = 1 -- Luna Labels Have 3 Styles : A Basic Label, A Green Information Label and A Red Warning Label. Look At The Following Image For More Details
+})
+
+ETab:CreateSection("Players ESP")
+
+-- Buttons & Toggles & Sliders & Keybinds
+local Toggle = ETab:CreateToggle({
+	Name = "PlayerESP",
+	Description = nil,
+	CurrentValue = false,
+    	Callback = function(Value)
+       	 playertoggle = Value
+            reloadESP()
+    	end
+}, "Toggle") -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+local Toggle = ETab:CreateToggle({
+	Name = "Player OutlineESP",
+	Description = nil,
+	CurrentValue = false,
+    	Callback = function(Value)
+       	 outlinetoggle = Value
+            outlineESP()
+    	end
+}, "Toggle") -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+local Toggle = ETab:CreateToggle({
+	Name = "Player NameESP",
+	Description = nil,
+	CurrentValue = false,
+    	Callback = function(Value)
+       	 nametoggle = Value
+            reloadnameESP()
+    	end
+}, "Toggle") -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+
+ETab:CreateSection("Map ESP")
+local Toggle = ETab:CreateToggle({
+	Name = "PC ESP",
+	Description = nil,
+	CurrentValue = false,
+    	Callback = function(Value)
+       	 pctoggle = Value
+            reloadESP()
+    	end
+}, "Toggle") -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+local Toggle = ETab:CreateToggle({
+	Name = "PC ESP V2",
+	Description = nil,
+	CurrentValue = false,
+    	Callback = function(Value)
+       	 pctoggle2 = Value
+            reloadPCESP()
+    	end
+}, "Toggle") -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+local Toggle = ETab:CreateToggle({
+	Name = "BestPC ESP",
+	Description = nil,
+	CurrentValue = false,
+    	Callback = function(Value)
+       	 bestpctoggle = Value
+            reloadESP()
+    	end
+}, "Toggle") -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+local Toggle = ETab:CreateToggle({
+	Name = "FreezePod ESP",
+	Description = nil,
+	CurrentValue = false,
+    	Callback = function(Value)
+       	 podstoggle = Value
+            reloadESP()
+    	end
+}, "Toggle") -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+local Toggle = ETab:CreateToggle({
+	Name = "ExitDoor ESP",
+	Description = nil,
+	CurrentValue = false,
+    	Callback = function(Value)
+       	 exitstoggle = Value
+            reloadESP()
+    	end
+}, "Toggle") -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+
+ETab:CreateSection("ESP Settings")
+local ColorPicker = ETab:CreateColorPicker({
+	Name = "Beast Main Color",
+	Color = Color3.fromRGB(255, 0, 0),
+	Flag = "ColorPicker1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+	Callback = function(Value)
+		beastcolor = Value
+	end
+}, "ColorPicker") -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+local ColorPicker = ETab:CreateColorPicker({
+	Name = "Beast Outline Color",
+	Color = Color3.fromRGB(255, 200, 200),
+	Flag = "ColorPicker1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+	Callback = function(Value)
+		beastoutline = Value
+	end
+}, "ColorPicker") -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+local ColorPicker = ETab:CreateColorPicker({
+	Name = "Survivor Main Color",
+	Color = Color3.fromRGB(0, 255, 0),
+	Flag = "ColorPicker1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+	Callback = function(Value)
+		survivorcolor = Value
+	end
+}, "ColorPicker") -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+local ColorPicker = ETab:CreateColorPicker({
+	Name = "Survivor Outline Color",
+	Color = Color3.fromRGB(200, 255, 200),
+	Flag = "ColorPicker1", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+	Callback = function(Value)
+		survivoroutline = Value
+	end
+}, "ColorPicker") -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+
+local Toggle = NBTab:CreateToggle({
+	Name = "NeverfailHack",
+	Description = nil,
+	CurrentValue = false,
+    	Callback = function(Value)
+       	 neverfailtoggle = Value
+    	end
+}, "Toggle") -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+local Toggle = NBTab:CreateToggle({
+	Name = "NeverfailHack V2",
+	Description = nil,
+	CurrentValue = false,
+    	Callback = function(Value)
+       	 neverfailhack = Value
+    	end
+}, "Toggle") -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+
+local Button = BTab:CreateButton({
+	Name = "NoSlow",
+	Description = nil, -- Creates A Description For Users to know what the button does (looks bad if you use it all the time),
+    	Callback = function()
+         if game.Players.LocalPlayer.TempPlayerStatsModule.IsBeast.Value == true then
+pcall(function()
+game.Players.LocalPlayer.Character.PowersLocalScript:Destroy()
+end)
+end
+    	end
+})
+local Button = BTab:CreateButton({
+	Name = "Unlock Camera",
+	Description = nil, -- Creates A Description For Users to know what the button does (looks bad if you use it all the time),
+    	Callback = function()
+         local player = game.Players.LocalPlayer
+
+	workspace.CurrentCamera.CameraSubject = player.Character:FindFirstChildWhichIsA('Humanoid')
+	workspace.CurrentCamera.CameraType = "Custom"
+	player.CameraMinZoomDistance = 0.5
+	player.CameraMaxZoomDistance = math.huge
+	player.CameraMode = "Classic"
+	player.Character.Head.Anchored = false
+    	end
+})
+local Button = BTab:CreateButton({
+	Name = "Remove Sound & Glow",
+	Description = nil, -- Creates A Description For Users to know what the button does (looks bad if you use it all the time),
+    	Callback = function()
+         if game.Players.LocalPlayer.TempPlayerStatsModule.IsBeast.Value == true then
+for i,v in pairs(game.Players.LocalPlayer.Character.Hammer.Handle:GetChildren()) do
+    if v:IsA("Sound") then
+        pcall(function()
+        v:Destroy()
+        end)
+    end
+end
+
+pcall(function()
+game.Players.LocalPlayer.Character.Gemstone.Handle.PointLight:Destroy()
+end)
+end
+    	end
+})
+
+
+
+-- Create the dropdown
+local Dropdown = TTab:CreateDropdown({
+	Name = "Players List",
+	Description = nil,
+	Options = PlayerNames,
+	CurrentOption = {PlayerNames[1] or "None"},
+	MultipleOptions = true,
+	SpecialType = nil,
+	Callback = function(selected)
+		UserInput = selected
+		print("Selected players:", table.concat(selected, ", "))
+	end
+}, "Dropdown")
+local Toggle = TTab:CreateToggle({
+	Name = "Slow Beast",
+	Description = nil,
+	CurrentValue = false,
+	Callback = function(Value)
+		slowbeast = Value
+
+		while true do
+			wait(0.3)
+			if slowbeast == true then
+				if UserInput then
+					local player = game:GetService("Players"):FindFirstChild(UserInput)
+					if player and player.Character and player.Character:FindFirstChild("BeastPowers") then
+						local event = player.Character.BeastPowers:FindFirstChild("PowersEvent")
+						if event then
+							event:FireServer("Jumped")
+						end
+					end
+				end
+			else
+				break
+			end
+		end
+	end
+}, "Toggle")
+local Toggle = TTab:CreateToggle({
+	Name = "Remove Rope",
+	Description = nil,
+	CurrentValue = false,
+	Callback = function(Value)
+		removerope = Value
+
+		while true do
+			wait(0.03)
+			if removerope == true then
+				if UserInput then
+					local player = game:GetService("Players"):FindFirstChild(UserInput)
+					if player and player.Character and player.Character:FindFirstChild("Hammer") then
+						local hammerEvent = player.Character.Hammer:FindFirstChild("HammerEvent")
+						if hammerEvent then
+							hammerEvent:FireServer("HammerClick", true)
+						end
+					end
+				end
+			else
+				break
+			end
+		end
+	end
+}, "RemoveRopeToggle")
+local Toggle = TTab:CreateToggle({
+	Name = "Force Beast Ability",
+	Description = nil,
+	CurrentValue = false,
+    	Callback = function(Value)
+       	 forceability = Value
+
+		while true do
+			wait(0.3)
+			if forceability == true then
+				if UserInput then
+					local player = game:GetService("Players"):FindFirstChild(UserInput)
+					if player and player.Character and player.Character:FindFirstChild("BeastPowers") then
+						local event = player.Character.BeastPowers:FindFirstChild("PowersEvent")
+						if event then
+							event:FireServer("Input")
+						end
+					end
+				end
+			else
+				break
+			end
+		end
+    	end
+}, "Toggle") -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+
+local Slider = PTab:CreateSlider({
+	Name = "WalkSpeed",
+	Range = {16, 300}, -- The Minimum And Maximum Values Respectively
+	Increment = 1, -- Basically The Changing Value/Rounding Off
+	CurrentValue = 16, -- The Starting Value
+    	Callback = function(Value)
+       	 game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = Value
+    	end
+}, "Slider") -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+local Button = PTab:CreateButton({
+	Name = "Join Another Server",
+	Description = nil, -- Creates A Description For Users to know what the button does (looks bad if you use it all the time),
+    	Callback = function()
+         -- rejoin		
+local TeleportService = game:GetService("TeleportService")
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+ 
+local Rejoin = coroutine.create(function()
+    local Success, ErrorMessage = pcall(function()
+        TeleportService:Teleport(game.PlaceId, LocalPlayer)
+    end)
+ 
+    if ErrorMessage and not Success then
+        warn(ErrorMessage)
+    end
+end)
+ 
+coroutine.resume(Rejoin)
+    	end
+})
+
+PTab:CreateSection("Themes")
+PTab:BuildThemeSection()
+
+-- Functions
+Players.PlayerAdded:Connect(function()
+	local updatedList = getPlayerNames()
+	Dropdown:Set({ Options = updatedList })
+end)
+
+Players.PlayerRemoving:Connect(function()
+	local updatedList = getPlayerNames()
+	Dropdown:Set({ Options = updatedList })
+end)
+
+function reloadESP()
+	spawn(function()
+		local map = game.ReplicatedStorage.CurrentMap.Value
+		if map ~= nil then
+		local mapstuff = map:getChildren()
+		for i=1,#mapstuff do
+			if mapstuff[i].Name == "ComputerTable" then
+				if mapstuff[i]:findFirstChild("Highlight") and not pctoggle then
+					mapstuff[i].Highlight:remove()
+				end
+				if pctoggle and not mapstuff[i]:findFirstChild("Highlight") then
+					local a = Instance.new("Highlight", mapstuff[i])
+					a.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+					a.FillColor = Color3.fromRGB(13, 105, 172) -- avoid display bugs as soon as loads :)
+					a.OutlineColor = Color3.fromRGB(20, 165, 270) -- avoid display bugs as soon as loads :)
+					spawn(function()
+						repeat 
+							if bestpctoggle and mapstuff[i]:findFirstChild("Screen") then
+								if getBestPC()[1].pc ~= nil and mapstuff[i] == getBestPC()[1].pc then
+									a.FillColor = mapstuff[i]:findFirstChild("Screen").Color
+									a.OutlineColor = Color3.fromRGB(200, 0, 255)
+								else
+									a.FillColor = mapstuff[i]:findFirstChild("Screen").Color
+									a.OutlineColor = Color3.fromRGB(a.FillColor.R*400, a.FillColor.G*400, a.FillColor.B*400)
+								end
+							else
+								a.FillColor = mapstuff[i]:findFirstChild("Screen").Color
+								a.OutlineColor = Color3.fromRGB(a.FillColor.R*400, a.FillColor.G*400, a.FillColor.B*400)
+							end
+							wait(1)
+						until mapstuff[i] == nil or a == nil
+					end)
+				end
+			end
+			if mapstuff[i].Name == "FreezePod" then
+				if mapstuff[i]:findFirstChild("Highlight") and not podstoggle then
+					mapstuff[i].Highlight:remove()
+				end
+				if podstoggle and not mapstuff[i]:findFirstChild("Highlight") then
+					local a = Instance.new("Highlight", mapstuff[i])
+					a.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+					a.FillColor = Color3.fromRGB(120,200,255)
+					a.OutlineColor = Color3.fromRGB(160,255,255)
+				end
+			end
+			if mapstuff[i].Name == "ExitDoor" then
+				if mapstuff[i]:findFirstChild("Highlight") and not exitstoggle then
+					mapstuff[i].Highlight:remove()
+				end
+				if exitstoggle and not mapstuff[i]:findFirstChild("Highlight") then
+					local a = Instance.new("Highlight", mapstuff[i])
+					a.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+					a.FillColor = Color3.fromRGB(252, 255, 100)
+					a.OutlineColor = Color3.fromRGB(255,255,160)
+				end
+			end
+			end
+			end
+	end)
+	local player = game.Players:GetChildren()
+	for i=1, #player do
+		if player[i] ~= game.Players.LocalPlayer and player[i].Character ~= nil then
+		local character = player[i].Character
+		if character:findFirstChild("Highlight") and not playertoggle then
+			character.Highlight:remove()
+		end
+		if playertoggle and not character:findFirstChild("Highlight") then
+			local a = Instance.new("Highlight", character)
+			a.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+			a.FillColor = Color3.fromRGB(0,255,0) -- avoid display bugs as soon as loads :)
+			a.OutlineColor = Color3.fromRGB(127,255,127) -- avoid display bugs as soon as loads :)
+			spawn(function()
+				repeat
+					wait(0.1)
+					if player[i] == getBeast() then
+						a.FillColor = beastcolor
+						a.OutlineColor = beastoutline
+					else
+						a.FillColor = survivorcolor
+						a.OutlineColor = survivoroutline
+					end
+				until character == nil or a == nil
+			end)
+			end
+			end
+	end
+end
+
+function GetBeast()
+	local PlayersService = game:FindFirstChildOfClass("Players")
+	if not PlayersService then
+		warn("Players service not found!")
+		return nil
+	end
+
+	local allPlayers = PlayersService:GetPlayers()
+	for _, plr in ipairs(allPlayers) do
+		local character = plr.Character
+		local stats = plr:FindFirstChild("TempPlayerStatsModule")
+		local isBeast = stats and stats:FindFirstChild("IsBeast")
+
+		if (isBeast and isBeast.Value == true) or (character and character:FindFirstChild("BeastPowers")) then
+			return plr
+		end
+	end
+
+	return nil -- no beast found
+end
+
+function reloadPCESP()
+    spawn(function()
+        local map = game.ReplicatedStorage.CurrentMap.Value
+        if map ~= nil then
+            local mapstuff = map:GetChildren()
+            for i = 1, #mapstuff do
+                if mapstuff[i].Name == "ComputerTable" then
+                    local Screen = mapstuff[i]:FindFirstChild("Screen")
+                    local Billboard = Screen and Screen:FindFirstChild("BillboardGui")
+                    local ImageLabel = Billboard and Billboard:FindFirstChild("ImageLabel")
+
+                    if Billboard and ImageLabel then
+                        if pctoggle2 == false then
+                            Billboard.Enabled = false
+                            Billboard.Active = false
+                            ImageLabel.Active = false
+                        elseif pctoggle2 == true and not Billboard.Enabled then
+                            Billboard.Enabled = true
+                            Billboard.Active = true
+                            ImageLabel.Active = true
+                            ImageLabel.ImageColor3 = Color3.fromRGB(20, 20, 195)
+
+                            spawn(function()
+                                repeat
+                                    wait(0.1)
+                                    if Screen and ImageLabel then
+                                        ImageLabel.ImageColor3 = Screen.Color
+                                    end
+                                until ImageLabel == nil or not ImageLabel:IsDescendantOf(game)
+                            end)
+                        end
+                    end
+                end
+            end
+        end
+    end)
+end
+
+function reloadnameESP()
+	local Players = game:GetService("Players")
+
+-- Function to create the BillboardGui
+local function addNameBillboard(player)
+	if player == Players.LocalPlayer then return end
+
+	local function onCharacterAdded(character)
+		local head = character:WaitForChild("Head", 5)
+		if not head then return end
+
+		if head:FindFirstChild("BillboardGui") and not nametoggle then
+			head.BillboardGui:remove()
+			return
+		end
+
+		if nametoggle and not head:FindFirstChild("BillboardGui") then
+			local billboard = Instance.new("BillboardGui")
+			billboard.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+			billboard.Active = true
+			billboard.AlwaysOnTop = true
+			billboard.LightInfluence = 1.000
+			billboard.Size = UDim2.new(0, 150, 0, 50)
+			billboard.StudsOffset = Vector3.new(0, 1, 0)
+			billboard.Parent = head
+
+			local label = Instance.new("TextLabel")
+			label.Parent = billboard
+			label.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			label.BackgroundTransparency = 1.000
+			label.BorderSizePixel = 0
+			label.Size = UDim2.new(1, 0, 1, 0)
+			label.Font = Enum.Font.SourceSans
+			label.Text = player.Name
+			label.TextColor3 = Color3.fromRGB(0, 255, 0)
+			label.TextScaled = true
+			label.TextSize = 14
+			label.TextWrapped = true
+			label.Name = "nameText"
+
+			-- Beast check loop
+			spawn(function()
+				repeat
+					wait(0.1)
+					if player == GetBeast() then
+						label.TextColor3 = beastcolor
+					else
+						label.TextColor3 = survivorcolor
+					end
+				until not head or not head.Parent
+			end)
+		end
+	end
+
+	-- Attach to character
+	if player.Character then
+		onCharacterAdded(player.Character)
+	end
+	player.CharacterAdded:Connect(onCharacterAdded)
+end
+
+-- Run for existing players
+for _, player in ipairs(Players:GetPlayers()) do
+	addNameBillboard(player)
+end
+
+-- Run for new players
+Players.PlayerAdded:Connect(function(player)
+	addNameBillboard(player)
+end)
+end
+
+function outlineESP()
+	local Players = game:GetService("Players")
+
+-- Function to add Outline to a player's character
+local function addHighlight(player)
+	if player == Players.LocalPlayer then return end
+
+	local function onCharacterAdded(character)
+		local existingHighlight = character:FindFirstChild("Outline")
+
+		-- If outlines are off, remove existing highlight
+		if existingHighlight and not outlinetoggle then
+			existingHighlight:Destroy()
+			return
+		end
+
+		-- If outlines are on, add highlight if it doesn't exist
+		if outlinetoggle and not existingHighlight then
+			local highlight = Instance.new("Highlight")
+			highlight.Name = "Outline"
+			highlight.Enabled = true
+			highlight.FillTransparency = 1
+			highlight.OutlineTransparency = 0
+			highlight.Parent = character
+
+			spawn(function()
+				repeat
+					wait(0.1)
+					if player == GetBeast() then
+						highlight.FillColor = beastcolor
+						highlight.OutlineColor = beastoutline
+					else
+						highlight.FillColor = survivorcolor
+						highlight.OutlineColor = survivoroutline
+					end
+				until highlight == nil or not highlight:IsDescendantOf(character)
+			end)
+		end
+	end
+
+	-- Handle current character (if loaded)
+	if player.Character then
+		onCharacterAdded(player.Character)
+	end
+
+	-- Connect to future characters
+	player.CharacterAdded:Connect(onCharacterAdded)
+end
+
+-- Add to existing players
+for _, player in ipairs(Players:GetPlayers()) do
+	addHighlight(player)
+end
+
+-- Handle new players joining
+Players.PlayerAdded:Connect(addHighlight)
+end
+
+function getBeast()
+	local player = game.Players:GetChildren()
+	for i=1, #player do
+		local character = player[i].Character
+		if player[i]:findFirstChild("TempPlayerStatsModule"):findFirstChild("IsBeast").Value == true or (character ~= nil and character:findFirstChild("BeastPowers")) then
+			return player[i]
+		end
+	end
+end
+
+function getBestPC()
+    local beast = getBeast()
+    local pcs = {}
+
+    local map = game.ReplicatedStorage.CurrentMap.Value
+    if map ~= nil then
+        local mapstuff = map:getChildren()
+        for i=1,#mapstuff do
+            if mapstuff[i].Name == "ComputerTable" then
+                if mapstuff[i].Screen.BrickColor ~= BrickColor.new("Dark green") then
+                    local magnitude = ((mapstuff[i].Screen.Position - beast.Character:findFirstChild("HumanoidRootPart").Position).magnitude)
+                    table.insert(pcs, {magnitude=magnitude, pc=mapstuff[i]})
+                end
+            end
+        end
+    end
+
+    table.sort(pcs, function(a, b) return a.magnitude > b.magnitude end)
+    return pcs
+end
+
+function isPlayerTyping()
+local hum = game.Players.LocalPlayer.Character:findFirstChildOfClass("Humanoid")
+local anims = hum:GetPlayingAnimationTracks()
+for i=1,#anims do
+if anims[i].Name == "AnimTyping" then
+return true
+end
+end
+return false
+end
+
+spawn(function() -- reload esp when new map
+	game.ReplicatedStorage.CurrentMap.Changed:Connect(function()
+		wait(5) -- hopefully enough time for map to load ;)
+		reloadESP()
+		if pctoggle2 then
+		reloadPCESP()	
+		end
+	end)
+end)
+
+spawn(function() -- reload esp when game becomes active
+	game.ReplicatedStorage.IsGameActive.Changed:Connect(function()
+		reloadESP()
+		if pctoggle2 then
+		reloadPCESP()	
+		end
+	end)
+end)
+
+
+
+spawn(function() --reload esp when character loads/deloads
+	game:GetService("Players").PlayerAdded:Connect(function(player)
+		player.CharacterAdded:Connect(function(character)
+			reloadESP()
+		end)
+		player.CharacterRemoved:Connect(function(character)
+			reloadESP()
+		end)
+	end)
+end)
+
+spawn(function() -- never fail hacking
+	local mt = getrawmetatable(game)
+	local old = mt.__namecall
+	setreadonly(mt,false)
+	mt.__namecall = newcclosure(function(self, ...)
+		local args = {...}
+		if getnamecallmethod() == 'FireServer' and args[1] == 'SetPlayerMinigameResult' and neverfailtoggle then
+			args[2] = true
+		end
+		return old(self, unpack(args))
+	end)
+end)
+
+spawn(function()
+    repeat
+        if neverfailhack then
+            game.ReplicatedStorage.RemoteEvent:FireServer("SetPlayerMinigameResult",true)
+        end
+    until not neverfailhack
+end)
