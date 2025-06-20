@@ -1,0 +1,138 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/Unknownkellymc1/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Trespasser Hub", HidePremium = false, SaveConfig = true, IntroEnabled = true, IntroText = "Loading Trespasser Hub By Ewerton99", ConfigFolder = "Trespasser Folder"})
+
+-- Variables
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local TweenService = game:GetService("TweenService")
+local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+local HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
+
+-- Toggle variable
+local toggle = false
+
+local function getCharacter()
+    return LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+end
+
+local function getHRP()
+    local character = getCharacter()
+    return character:WaitForChild("HumanoidRootPart")
+end
+
+local leverPaths = {
+    workspace.EmergencyExits.EmergencyExit2.Lever.Main,
+    workspace.EmergencyExits.EmergencyExit3.Lever.Main,
+    workspace.EmergencyExits.EmergencyExit4.Lever.Main,
+    workspace.EmergencyExits["2"].EmergencyExit5.Lever.Main,
+    workspace.EmergencyExits["3"].EmergencyExit6.Lever.Main,
+}
+
+task.spawn(function()
+    while toggle do
+        for _, mainPart in ipairs(leverPaths) do
+            local prompt = mainPart:FindFirstChildOfClass("ProximityPrompt")
+            if prompt and prompt.Enabled then
+                local hrp = getHRP()
+
+                -- Teleport near the lever
+                hrp.CFrame = mainPart.CFrame + Vector3.new(0, 0, -2)
+
+                -- Wait briefly to simulate arrival
+                task.wait(0.3)
+
+                -- Trigger the prompt
+                fireproximityprompt(prompt)
+
+                -- Wait to avoid firing multiple times
+                task.wait(1)
+            end
+        end
+        task.wait(1) -- Wait before rechecking
+    end
+end)
+
+
+local function destroyValidNPCs()
+    local npcs = workspace:FindFirstChild("GameNPCs")
+    if not npcs then return end
+
+    for _, npc in ipairs(npcs:GetChildren()) do
+        if npc:IsA("Model") then
+            local torso = npc:FindFirstChild("Torso")
+            if npc:FindFirstChild("Head")
+                and npc:FindFirstChild("HumanoidRootPart")
+                and npc:FindFirstChild("Left Arm")
+                and npc:FindFirstChild("Right Arm")
+                and npc:FindFirstChild("Left Leg")
+                and npc:FindFirstChild("Right Leg")
+                and torso
+                and torso:IsA("Part")
+                and torso.BrickColor == BrickColor.new("Really black") then
+
+                npc:Destroy()
+                print("Manually destroyed NPC:", npc.Name)
+            end
+        end
+    end
+end
+
+-- Notifications
+OrionLib:MakeNotification({
+	Name = "Tyy For Using",
+	Content = "Thanks For Using Trespasser Gui",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+
+-- Tabs
+local ChapterTab1 = Window:MakeTab({
+	Name = "Chapter 1",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+local PlayerTab = Window:MakeTab({
+	Name = "Player",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+-- Ui & Sections
+local Section = ChapterTab1:AddSection({
+	Name = "Chapter 1"
+})
+
+ChapterTab1:AddToggle({
+	Name = "Auto Emergency Exits",
+	Default = false,
+	Callback = function(Value)
+		toggle = Value
+	end    
+})
+
+ChapterTab1:AddButton({
+	Name = "Destroy MonsterNPC (PLEASE, DON'T PRESS THIS IN CHAPTER 2)",
+	Callback = function()
+      		destroyValidNPCs()
+  	end    
+})
+
+PlayerTab:AddSlider({
+	Name = "WalkSpeed",
+	Min = 16,
+	Max = 255,
+	Default = 16,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "SPEED HACKER",
+	Callback = function(Value)
+		Character.Humanoid.WalkSpeed = Value
+	end    
+})
+
+PlayerTab:AddButton({
+	Name = "Infinite Yield",
+	Callback = function()
+      		loadstring(game:HttpGet("https://raw.githubusercontent.com/edgeiy/infiniteyield/master/source"))()
+  	end    
+})
