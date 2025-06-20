@@ -1,0 +1,116 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/Unknownkellymc1/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Trespasser Hub", HidePremium = false, SaveConfig = true, IntroEnabled = true, IntroText = "Loading Trespasser Hub By Ewerton99", ConfigFolder = "Trespasser Folder"})
+
+-- Variables
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local TweenService = game:GetService("TweenService")
+local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+local HumanoidRootPart = Character:WaitForChild("HumanoidRootPart")
+
+-- Toggle variable
+local autoLeversEnabled = false
+
+-- Define levers
+local levers = {
+    workspace.GameData.room18.Lever.Main,
+    workspace.GameData.room9.Lever.Main,
+    workspace.GameData.room7.Lever.Main,
+    workspace.GameData.room11.Lever.Main,
+    workspace.GameData.room14.Lever.Main,
+    workspace.GameData.room4.Lever.Main
+}
+
+-- Function to check if "NPC" is present in GameNPCs
+local function isTargetNPCPresent()
+    local npcFolder = workspace:FindFirstChild("GameNPCs")
+    return npcFolder and npcFolder:FindFirstChild("NPC") ~= nil
+end
+
+-- Main loop
+spawn(function()
+    while true do
+        if autoLeversEnabled then
+            -- Wait for NPC to appear
+            repeat wait(0.5) until isTargetNPCPresent()
+
+            -- While NPC is still present, teleport and trigger levers
+            while isTargetNPCPresent() and autoLeversEnabled do
+                for _, lever in ipairs(levers) do
+                    if lever and lever:IsA("BasePart") then
+                        HumanoidRootPart.CFrame = lever.CFrame + Vector3.new(0, 3, 0)
+                        wait(0.5)
+                        
+                        local prompt = lever:FindFirstChildWhichIsA("ProximityPrompt")
+                        if prompt then
+                            fireproximityprompt(prompt)
+                        end
+                        wait(0.3)
+                    end
+                end
+                wait(1)
+            end
+        end
+        wait(0.5)
+    end
+end)
+
+-- Notifications
+OrionLib:MakeNotification({
+	Name = "Tyy For Using",
+	Content = "Thanks For Using Trespasser Gui",
+	Image = "rbxassetid://4483345998",
+	Time = 5
+})
+
+-- Tabs
+local ChapterTab2 = Window:MakeTab({
+	Name = "Chapter 2",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+local PlayerTab = Window:MakeTab({
+	Name = "Player",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+-- Ui & Sections
+local Section = ChapterTab2:AddSection({
+	Name = "Chapter 2"
+})
+
+ChapterTab2:AddToggle({
+	Name = "AutoLever",
+	Default = false,
+	Callback = function(Value)
+		autoLeversEnabled = Value
+	end    
+})
+
+ChapterTab2:AddButton({
+	Name = "Destroy MonsterNPC",
+	Callback = function()
+      		workspace.GameNPCs.NPC:Destroy()
+  	end    
+})
+
+PlayerTab:AddSlider({
+	Name = "WalkSpeed",
+	Min = 16,
+	Max = 255,
+	Default = 16,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "SPEED HACKER",
+	Callback = function(Value)
+		Character.Humanoid.WalkSpeed = Value
+	end    
+})
+
+PlayerTab:AddButton({
+	Name = "Infinite Yield",
+	Callback = function()
+      		loadstring(game:HttpGet("https://raw.githubusercontent.com/edgeiy/infiniteyield/master/source"))()
+  	end    
+})
