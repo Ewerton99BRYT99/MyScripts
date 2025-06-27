@@ -1,0 +1,21 @@
+dragStart = input. Position startPos = mainFrame. Position end local function updateDrag(input) if dragging then local delta = input. Position - dragStart mainFrame. Position = UDim2.new(startPos.X.Scale, startPos. X. Offset + delta.X, startPos. Y.Scale, startPos. Y. Offset + delta.Y) end end local function endDrag() dragging = false end titleBar.InputBegan:Connect(function(input) if
+
+input. UserInputType ==
+
+Enum.UserInputType. MouseButton1 or
+
+input.UserInputType == Enum.UserInputType.Touch
+
+then beginDrag(input) end end)
+
+titleBar.InputChanged: Connect(function(input) if
+
+dragging then updateDrag(input) end end)
+
+titleBar.InputEnded: Connect(function(input) if
+
+input. UserInputType ==
+
+Enum.UserInputType.MouseButton1 or
+
+input.UserInputType == Enum. UserInputType.Touch then endDrag() end end)
