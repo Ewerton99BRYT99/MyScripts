@@ -1,0 +1,720 @@
+local Converted = {
+	["_ButtonsGUI"] = Instance.new("ScreenGui");
+	["_ShootWolf"] = Instance.new("TextButton");
+	["_UICorner"] = Instance.new("UICorner");
+	["_UIStroke"] = Instance.new("UIStroke");
+	["_bringBow"] = Instance.new("TextButton");
+	["_UICorner1"] = Instance.new("UICorner");
+	["_UIStroke1"] = Instance.new("UIStroke");
+	["_UIAspectRatioConstraint"] = Instance.new("UIAspectRatioConstraint");
+	["_TpShoot"] = Instance.new("TextButton");
+	["_UICorner2"] = Instance.new("UICorner");
+	["_UIStroke2"] = Instance.new("UIStroke");
+	["_UIAspectRatioConstraint1"] = Instance.new("UIAspectRatioConstraint");
+	["_showGUI"] = Instance.new("TextButton");
+	["_UICorner3"] = Instance.new("UICorner");
+	["_UIStroke3"] = Instance.new("UIStroke");
+	["_GUIFrame"] = Instance.new("Frame");
+	["_UICorner4"] = Instance.new("UICorner");
+	["_UIStroke4"] = Instance.new("UIStroke");
+	["_ESPFrame"] = Instance.new("TextLabel");
+	["_UICorner5"] = Instance.new("UICorner");
+	["_UIStroke5"] = Instance.new("UIStroke");
+	["_PlayersESPT"] = Instance.new("TextButton");
+	["_UICorner6"] = Instance.new("UICorner");
+	["_UIStroke6"] = Instance.new("UIStroke");
+	["_HuntersESPT"] = Instance.new("TextButton");
+	["_UICorner7"] = Instance.new("UICorner");
+	["_UIStroke7"] = Instance.new("UIStroke");
+	["_WolfESPT"] = Instance.new("TextButton");
+	["_UICorner8"] = Instance.new("UICorner");
+	["_UIStroke8"] = Instance.new("UIStroke");
+	["_BUTTONSFrame"] = Instance.new("TextLabel");
+	["_UICorner9"] = Instance.new("UICorner");
+	["_UIStroke9"] = Instance.new("UIStroke");
+	["_TPShootButtonT"] = Instance.new("TextButton");
+	["_UICorner10"] = Instance.new("UICorner");
+	["_UIStroke10"] = Instance.new("UIStroke");
+	["_ShootButtonT"] = Instance.new("TextButton");
+	["_UICorner11"] = Instance.new("UICorner");
+	["_UIStroke11"] = Instance.new("UIStroke");
+	["_GrabBowButtonT"] = Instance.new("TextButton");
+	["_UICorner12"] = Instance.new("UICorner");
+	["_UIStroke12"] = Instance.new("UIStroke");
+	["_PredictionFrame"] = Instance.new("TextLabel");
+	["_UICorner13"] = Instance.new("UICorner");
+	["_UIStroke13"] = Instance.new("UIStroke");
+	["_ShootButtonT1"] = Instance.new("TextButton");
+	["_UICorner14"] = Instance.new("UICorner");
+	["_UIStroke14"] = Instance.new("UIStroke");
+	["_CreditsFrame"] = Instance.new("TextLabel");
+}
+
+Converted["_ButtonsGUI"].ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+Converted["_ButtonsGUI"].Name = "ButtonsGUI"
+Converted["_ButtonsGUI"].Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+Converted["_ButtonsGUI"].ResetOnSpawn = false
+
+Converted["_ShootWolf"].Font = Enum.Font.SourceSans
+Converted["_ShootWolf"].Text = "SHOOT"
+Converted["_ShootWolf"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_ShootWolf"].TextSize = 40
+Converted["_ShootWolf"].BackgroundColor3 = Color3.fromRGB(66.00000366568565, 66.00000366568565, 66.00000366568565)
+Converted["_ShootWolf"].BackgroundTransparency = 0.4000000059604645
+Converted["_ShootWolf"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_ShootWolf"].BorderSizePixel = 0
+Converted["_ShootWolf"].Position = UDim2.new(0.748336017, 0, 0.237090379, 0)
+Converted["_ShootWolf"].Size = UDim2.new(0, 166, 0, 59)
+Converted["_ShootWolf"].Name = "ShootWolf"
+Converted["_ShootWolf"].Parent = Converted["_ButtonsGUI"]
+Converted["_ShootWolf"].Active = true
+Converted["_ShootWolf"].Draggable = true
+
+Converted["_UICorner"].Parent = Converted["_ShootWolf"]
+
+Converted["_UIStroke"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke"].Thickness = 3
+Converted["_UIStroke"].Parent = Converted["_ShootWolf"]
+
+Converted["_bringBow"].Font = Enum.Font.SourceSans
+Converted["_bringBow"].Text = "Grab Bow"
+Converted["_bringBow"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_bringBow"].TextSize = 23
+Converted["_bringBow"].TextWrapped = true
+Converted["_bringBow"].BackgroundColor3 = Color3.fromRGB(66.00000366568565, 66.00000366568565, 66.00000366568565)
+Converted["_bringBow"].BackgroundTransparency = 0.4000000059604645
+Converted["_bringBow"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_bringBow"].BorderSizePixel = 0
+Converted["_bringBow"].Position = UDim2.new(0.370446295, 0, 0.0503544286, 0)
+Converted["_bringBow"].Size = UDim2.new(0, 57, 0, 46)
+Converted["_bringBow"].Name = "bringBow"
+Converted["_bringBow"].Parent = Converted["_ButtonsGUI"]
+Converted["_bringBow"].Active = true
+Converted["_bringBow"].Draggable = true
+
+Converted["_UICorner1"].Parent = Converted["_bringBow"]
+
+Converted["_UIStroke1"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke1"].Thickness = 3
+Converted["_UIStroke1"].Parent = Converted["_bringBow"]
+
+Converted["_UIAspectRatioConstraint"].Parent = Converted["_bringBow"]
+
+Converted["_TpShoot"].Font = Enum.Font.SourceSans
+Converted["_TpShoot"].Text = "TP Shoot"
+Converted["_TpShoot"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_TpShoot"].TextSize = 23
+Converted["_TpShoot"].TextWrapped = true
+Converted["_TpShoot"].BackgroundColor3 = Color3.fromRGB(66.00000366568565, 66.00000366568565, 66.00000366568565)
+Converted["_TpShoot"].BackgroundTransparency = 0.4000000059604645
+Converted["_TpShoot"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_TpShoot"].BorderSizePixel = 0
+Converted["_TpShoot"].Position = UDim2.new(0.286372602, 0, 0.0503544286, 0)
+Converted["_TpShoot"].Size = UDim2.new(0, 57, 0, 46)
+Converted["_TpShoot"].Name = "TpShoot"
+Converted["_TpShoot"].Parent = Converted["_ButtonsGUI"]
+Converted["_TpShoot"].Active = true
+Converted["_TpShoot"].Draggable = true
+
+Converted["_UICorner2"].Parent = Converted["_TpShoot"]
+
+Converted["_UIStroke2"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke2"].Thickness = 3
+Converted["_UIStroke2"].Parent = Converted["_TpShoot"]
+
+Converted["_UIAspectRatioConstraint1"].Parent = Converted["_TpShoot"]
+
+Converted["_showGUI"].Font = Enum.Font.SourceSans
+Converted["_showGUI"].Text = "AWOO HUB"
+Converted["_showGUI"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_showGUI"].TextSize = 23
+Converted["_showGUI"].BackgroundColor3 = Color3.fromRGB(30.00000201165676, 30.00000201165676, 30.00000201165676)
+Converted["_showGUI"].BackgroundTransparency = 0.4000000059604645
+Converted["_showGUI"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_showGUI"].BorderSizePixel = 0
+Converted["_showGUI"].Position = UDim2.new(0.0108554829, 0, 0.402864903, 0)
+Converted["_showGUI"].Size = UDim2.new(0, 94, 0, 30)
+Converted["_showGUI"].Name = "showGUI"
+Converted["_showGUI"].Parent = Converted["_ButtonsGUI"]
+Converted["_showGUI"].Active = true
+Converted["_showGUI"].Draggable = true
+
+
+Converted["_UICorner3"].CornerRadius = UDim.new(1, 0)
+Converted["_UICorner3"].Parent = Converted["_showGUI"]
+
+Converted["_UIStroke3"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke3"].Thickness = 3
+Converted["_UIStroke3"].Parent = Converted["_showGUI"]
+
+Converted["_GUIFrame"].BackgroundColor3 = Color3.fromRGB(30.00000201165676, 30.00000201165676, 30.00000201165676)
+Converted["_GUIFrame"].BackgroundTransparency = 0.20000000298023224
+Converted["_GUIFrame"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_GUIFrame"].BorderSizePixel = 0
+Converted["_GUIFrame"].Position = UDim2.new(0.286372602, 0, 0.206000537, 0)
+Converted["_GUIFrame"].Size = UDim2.new(0, 307, 0, 210)
+Converted["_GUIFrame"].Name = "GUIFrame"
+Converted["_GUIFrame"].Parent = Converted["_ButtonsGUI"]
+Converted["_GUIFrame"].Active = true
+Converted["_GUIFrame"].Draggable = true
+
+Converted["_UICorner4"].CornerRadius = UDim.new(0, 9)
+Converted["_UICorner4"].Parent = Converted["_GUIFrame"]
+
+Converted["_UIStroke4"].Thickness = 3
+Converted["_UIStroke4"].Parent = Converted["_GUIFrame"]
+
+Converted["_ESPFrame"].Font = Enum.Font.SourceSans
+Converted["_ESPFrame"].Text = ""
+Converted["_ESPFrame"].TextColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_ESPFrame"].TextSize = 14
+Converted["_ESPFrame"].BackgroundColor3 = Color3.fromRGB(65.0000037252903, 65.0000037252903, 65.0000037252903)
+Converted["_ESPFrame"].BackgroundTransparency = 0.30000001192092896
+Converted["_ESPFrame"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_ESPFrame"].BorderSizePixel = 0
+Converted["_ESPFrame"].Position = UDim2.new(0.028799301, 0, 0.0792861357, 0)
+Converted["_ESPFrame"].Size = UDim2.new(0, 138, 0, 110)
+Converted["_ESPFrame"].Name = "ESPFrame"
+Converted["_ESPFrame"].Parent = Converted["_GUIFrame"]
+
+Converted["_UICorner5"].Parent = Converted["_ESPFrame"]
+
+Converted["_UIStroke5"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke5"].Thickness = 3
+Converted["_UIStroke5"].Parent = Converted["_ESPFrame"]
+
+Converted["_PlayersESPT"].Font = Enum.Font.SourceSans
+Converted["_PlayersESPT"].Text = "Players"
+Converted["_PlayersESPT"].TextColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_PlayersESPT"].TextSize = 23
+Converted["_PlayersESPT"].BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+Converted["_PlayersESPT"].BackgroundTransparency = 0.699999988079071
+Converted["_PlayersESPT"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_PlayersESPT"].BorderSizePixel = 0
+Converted["_PlayersESPT"].Position = UDim2.new(0.0528809913, 0, 0.108433738, 0)
+Converted["_PlayersESPT"].Size = UDim2.new(0, 58, 0, 40)
+Converted["_PlayersESPT"].Name = "PlayersESPT"
+Converted["_PlayersESPT"].Parent = Converted["_ESPFrame"]
+
+Converted["_UICorner6"].Parent = Converted["_PlayersESPT"]
+
+Converted["_UIStroke6"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke6"].Thickness = 3
+Converted["_UIStroke6"].Parent = Converted["_PlayersESPT"]
+
+Converted["_HuntersESPT"].Font = Enum.Font.SourceSans
+Converted["_HuntersESPT"].Text = "Hunters"
+Converted["_HuntersESPT"].TextColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_HuntersESPT"].TextSize = 20
+Converted["_HuntersESPT"].BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+Converted["_HuntersESPT"].BackgroundTransparency = 0.699999988079071
+Converted["_HuntersESPT"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_HuntersESPT"].BorderSizePixel = 0
+Converted["_HuntersESPT"].Position = UDim2.new(0.533883154, 0, 0.108433746, 0)
+Converted["_HuntersESPT"].Size = UDim2.new(0, 58, 0, 40)
+Converted["_HuntersESPT"].Name = "HuntersESPT"
+Converted["_HuntersESPT"].Parent = Converted["_ESPFrame"]
+
+Converted["_UICorner7"].Parent = Converted["_HuntersESPT"]
+
+Converted["_UIStroke7"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke7"].Thickness = 3
+Converted["_UIStroke7"].Parent = Converted["_HuntersESPT"]
+
+Converted["_WolfESPT"].Font = Enum.Font.SourceSans
+Converted["_WolfESPT"].Text = "Wolf"
+Converted["_WolfESPT"].TextColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_WolfESPT"].TextSize = 25
+Converted["_WolfESPT"].BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+Converted["_WolfESPT"].BackgroundTransparency = 0.699999988079071
+Converted["_WolfESPT"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_WolfESPT"].BorderSizePixel = 0
+Converted["_WolfESPT"].Position = UDim2.new(0.287506312, 0, 0.553409934, 0)
+Converted["_WolfESPT"].Size = UDim2.new(0, 58, 0, 40)
+Converted["_WolfESPT"].Name = "WolfESPT"
+Converted["_WolfESPT"].Parent = Converted["_ESPFrame"]
+
+Converted["_UICorner8"].Parent = Converted["_WolfESPT"]
+
+Converted["_UIStroke8"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke8"].Thickness = 3
+Converted["_UIStroke8"].Parent = Converted["_WolfESPT"]
+
+Converted["_BUTTONSFrame"].Font = Enum.Font.SourceSans
+Converted["_BUTTONSFrame"].Text = ""
+Converted["_BUTTONSFrame"].TextColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_BUTTONSFrame"].TextSize = 14
+Converted["_BUTTONSFrame"].BackgroundColor3 = Color3.fromRGB(65.0000037252903, 65.0000037252903, 65.0000037252903)
+Converted["_BUTTONSFrame"].BackgroundTransparency = 0.30000001192092896
+Converted["_BUTTONSFrame"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_BUTTONSFrame"].BorderSizePixel = 0
+Converted["_BUTTONSFrame"].Position = UDim2.new(0.52065593, 0, 0.0792861208, 0)
+Converted["_BUTTONSFrame"].Size = UDim2.new(0, 138, 0, 110)
+Converted["_BUTTONSFrame"].Name = "BUTTONSFrame"
+Converted["_BUTTONSFrame"].Parent = Converted["_GUIFrame"]
+
+Converted["_UICorner9"].Parent = Converted["_BUTTONSFrame"]
+
+Converted["_UIStroke9"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke9"].Thickness = 3
+Converted["_UIStroke9"].Parent = Converted["_BUTTONSFrame"]
+
+Converted["_TPShootButtonT"].Font = Enum.Font.SourceSans
+Converted["_TPShootButtonT"].Text = "TpShoot"
+Converted["_TPShootButtonT"].TextColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_TPShootButtonT"].TextSize = 19
+Converted["_TPShootButtonT"].BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+Converted["_TPShootButtonT"].BackgroundTransparency = 0.699999988079071
+Converted["_TPShootButtonT"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_TPShootButtonT"].BorderSizePixel = 0
+Converted["_TPShootButtonT"].Position = UDim2.new(0.0456346162, 0, 0.108433738, 0)
+Converted["_TPShootButtonT"].Size = UDim2.new(0, 58, 0, 40)
+Converted["_TPShootButtonT"].Name = "TPShootButtonT"
+Converted["_TPShootButtonT"].Parent = Converted["_BUTTONSFrame"]
+
+Converted["_UICorner10"].Parent = Converted["_TPShootButtonT"]
+
+Converted["_UIStroke10"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke10"].Thickness = 3
+Converted["_UIStroke10"].Parent = Converted["_TPShootButtonT"]
+
+Converted["_ShootButtonT"].Font = Enum.Font.SourceSans
+Converted["_ShootButtonT"].Text = "Shoot"
+Converted["_ShootButtonT"].TextColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_ShootButtonT"].TextSize = 27
+Converted["_ShootButtonT"].BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+Converted["_ShootButtonT"].BackgroundTransparency = 0.699999988079071
+Converted["_ShootButtonT"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_ShootButtonT"].BorderSizePixel = 0
+Converted["_ShootButtonT"].Position = UDim2.new(0.533883154, 0, 0.108433746, 0)
+Converted["_ShootButtonT"].Size = UDim2.new(0, 58, 0, 40)
+Converted["_ShootButtonT"].Name = "ShootButtonT"
+Converted["_ShootButtonT"].Parent = Converted["_BUTTONSFrame"]
+
+Converted["_UICorner11"].Parent = Converted["_ShootButtonT"]
+
+Converted["_UIStroke11"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke11"].Thickness = 3
+Converted["_UIStroke11"].Parent = Converted["_ShootButtonT"]
+
+Converted["_GrabBowButtonT"].Font = Enum.Font.SourceSans
+Converted["_GrabBowButtonT"].Text = "GrabBow"
+Converted["_GrabBowButtonT"].TextColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_GrabBowButtonT"].TextSize = 18
+Converted["_GrabBowButtonT"].BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+Converted["_GrabBowButtonT"].BackgroundTransparency = 0.699999988079071
+Converted["_GrabBowButtonT"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_GrabBowButtonT"].BorderSizePixel = 0
+Converted["_GrabBowButtonT"].Position = UDim2.new(0.287506312, 0, 0.553409934, 0)
+Converted["_GrabBowButtonT"].Size = UDim2.new(0, 58, 0, 40)
+Converted["_GrabBowButtonT"].Name = "GrabBowButtonT"
+Converted["_GrabBowButtonT"].Parent = Converted["_BUTTONSFrame"]
+
+Converted["_UICorner12"].Parent = Converted["_GrabBowButtonT"]
+
+Converted["_UIStroke12"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke12"].Thickness = 3
+Converted["_UIStroke12"].Parent = Converted["_GrabBowButtonT"]
+
+Converted["_PredictionFrame"].Font = Enum.Font.SourceSans
+Converted["_PredictionFrame"].Text = ""
+Converted["_PredictionFrame"].TextColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_PredictionFrame"].TextSize = 14
+Converted["_PredictionFrame"].BackgroundColor3 = Color3.fromRGB(65.0000037252903, 65.0000037252903, 65.0000037252903)
+Converted["_PredictionFrame"].BackgroundTransparency = 0.30000001192092896
+Converted["_PredictionFrame"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_PredictionFrame"].BorderSizePixel = 0
+Converted["_PredictionFrame"].Position = UDim2.new(0.52065593, 0, 0.65794152, 0)
+Converted["_PredictionFrame"].Size = UDim2.new(0, 138, 0, 60)
+Converted["_PredictionFrame"].Name = "PredictionFrame"
+Converted["_PredictionFrame"].Parent = Converted["_GUIFrame"]
+
+Converted["_UICorner13"].Parent = Converted["_PredictionFrame"]
+
+Converted["_UIStroke13"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke13"].Thickness = 3
+Converted["_UIStroke13"].Parent = Converted["_PredictionFrame"]
+
+Converted["_ShootButtonT1"].Font = Enum.Font.SourceSans
+Converted["_ShootButtonT1"].Text = "Prediction"
+Converted["_ShootButtonT1"].TextColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_ShootButtonT1"].TextSize = 29
+Converted["_ShootButtonT1"].BackgroundColor3 = Color3.fromRGB(255, 0, 0)
+Converted["_ShootButtonT1"].BackgroundTransparency = 0.699999988079071
+Converted["_ShootButtonT1"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_ShootButtonT1"].BorderSizePixel = 0
+Converted["_ShootButtonT1"].Position = UDim2.new(0.0456346162, 0, 0.15843378, 0)
+Converted["_ShootButtonT1"].Size = UDim2.new(0, 125, 0, 40)
+Converted["_ShootButtonT1"].Name = "ShootButtonT"
+Converted["_ShootButtonT1"].Parent = Converted["_PredictionFrame"]
+
+Converted["_UICorner14"].Parent = Converted["_ShootButtonT1"]
+
+Converted["_UIStroke14"].ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+Converted["_UIStroke14"].Thickness = 3
+Converted["_UIStroke14"].Parent = Converted["_ShootButtonT1"]
+
+Converted["_CreditsFrame"].Font = Enum.Font.SourceSans
+Converted["_CreditsFrame"].Text = "AWOO HUB V3 BETA Script By Ewerton99 Gui By Ewerton99"
+Converted["_CreditsFrame"].TextColor3 = Color3.fromRGB(255, 255, 255)
+Converted["_CreditsFrame"].TextSize = 16
+Converted["_CreditsFrame"].TextWrapped = true
+Converted["_CreditsFrame"].BackgroundColor3 = Color3.fromRGB(65.0000037252903, 65.0000037252903, 65.0000037252903)
+Converted["_CreditsFrame"].BackgroundTransparency = 1
+Converted["_CreditsFrame"].BorderColor3 = Color3.fromRGB(0, 0, 0)
+Converted["_CreditsFrame"].BorderSizePixel = 0
+Converted["_CreditsFrame"].Position = UDim2.new(0.026058631, 0, 0.657142878, 0)
+Converted["_CreditsFrame"].Size = UDim2.new(0, 138, 0, 60)
+Converted["_CreditsFrame"].Name = "CreditsFrame"
+Converted["_CreditsFrame"].Parent = Converted["_GUIFrame"]
+
+local WolvesESP = false
+local HuntersESP = false
+local PlayersESP = false
+
+local PredictionOffset = 3
+local PredictionT = false
+
+Converted["_ShootWolf"].MouseButton1Click:Connect(function()
+	NormalShoot()
+end)
+
+Converted["_bringBow"].MouseButton1Click:Connect(function()
+	GrabBowTp()
+end)
+
+Converted["_TpShoot"].MouseButton1Click:Connect(function()
+	TeleportShoot()
+end)
+
+Converted["_showGUI"].MouseButton1Click:Connect(function()
+	Converted["_GUIFrame"].Visible = not Converted["_GUIFrame"].Visible
+end)
+
+Converted["_HuntersESPT"].MouseButton1Click:Connect(function()
+	if HuntersESP == false then
+	    HuntersESP = true
+	    Converted["_HuntersESPT"].BackgroundColor3 = Color3.new(0, 255, 0)
+	else
+	    HuntersESP = false
+	    Converted["_HuntersESPT"].BackgroundColor3 = Color3.new(255, 0, 0)
+	end
+end)
+
+Converted["_PlayersESPT"].MouseButton1Click:Connect(function()
+	if PlayersESP == false then
+	    PlayersESP = true
+	    Converted["_PlayersESPT"].BackgroundColor3 = Color3.new(0, 255, 0)
+	else
+	    PlayersESP = false
+	    Converted["_PlayersESPT"].BackgroundColor3 = Color3.new(255, 0, 0)
+	end
+end)
+
+Converted["_WolfESPT"].MouseButton1Click:Connect(function()
+	if WolvesESP == false then
+	    WolvesESP = true
+	    Converted["_WolfESPT"].BackgroundColor3 = Color3.new(0, 255, 0)
+	else
+	    WolvesESP = false
+	    Converted["_WolfESPT"].BackgroundColor3 = Color3.new(255, 0, 0)
+	end
+end)
+
+Converted["_GrabBowButtonT"].MouseButton1Click:Connect(function()
+	Converted["_bringBow"].Visible = not Converted["_bringBow"].Visible
+end)
+
+Converted["_ShootButtonT"].MouseButton1Click:Connect(function()
+	Converted["_ShootWolf"].Visible = not Converted["_ShootWolf"].Visible
+end)
+
+Converted["_TPShootButtonT"].MouseButton1Click:Connect(function()
+	Converted["_TpShoot"].Visible = not Converted["_TpShoot"].Visible
+end)
+
+Converted["_ShootButtonT1"].MouseButton1Click:Connect(function()
+	if PredictionT == false then
+	    PredictionT = true
+	    Converted["_ShootButtonT1"].BackgroundColor3 = Color3.new(0, 255, 0)
+	else
+	    PredictionT = false
+	    Converted["_ShootButtonT1"].BackgroundColor3 = Color3.new(255, 0, 0)
+	end
+end)
+
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+local HRP = Character:WaitForChild("HumanoidRootPart")
+local Backpack = LocalPlayer:WaitForChild("Backpack")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local RunService = game:GetService("RunService")
+local CrossB = workspace:FindFirstChild("EffectsBin"):WaitForChild("Handle")
+
+local Wolves = ReplicatedStorage:WaitForChild("Wolves")
+local Hunters = ReplicatedStorage:WaitForChild("Hunters")
+
+-- State
+local currentWolfHighlight = nil
+local currentHunterHighlight = nil
+local currentWolfName = nil
+local currentHunterName = nil
+local normalPlayerHighlights = {}
+
+-- Functions
+local function createESP(player, fillColor, outlineColor, tag)
+	if not player or not player.Character then return end
+	local char = player.Character
+	if char:FindFirstChild(tag) then return end
+
+	local highlight = Instance.new("Highlight")
+	highlight.Name = tag
+	highlight.FillColor = fillColor
+	highlight.OutlineColor = outlineColor
+	highlight.FillTransparency = 0.5
+	highlight.OutlineTransparency = 0
+	highlight.Adornee = char
+	highlight.Parent = char
+	return highlight
+end
+
+local function removeESP(esp)
+	if esp and esp.Parent then
+		esp:Destroy()
+	end
+end
+
+-- WolvesESP
+local function updateWolfESP()
+	removeESP(currentWolfHighlight)
+	currentWolfName = nil
+
+	local GetWolves = Wolves:FindFirstChildOfClass("IntValue")
+	if GetWolves and WolvesESP and GetWolves.Name ~= "" then
+		currentWolfName = GetWolves.Name
+		local player = Players:FindFirstChild(currentWolfName)
+		currentWolfHighlight = createESP(
+			player,
+			Color3.fromRGB(255, 50, 50), -- Bright Red
+			Color3.fromRGB(60, 0, 0),    -- Dark Red
+			"WolfESP"
+		)
+	end
+end
+
+-- HuntersESP
+local function updateHunterESP()
+	removeESP(currentHunterHighlight)
+	currentHunterName = nil
+
+	local GetHunters = Hunters:FindFirstChildOfClass("IntValue")
+	if GetHunters and HuntersESP and GetHunters.Name ~= "" then
+		currentHunterName = GetHunters.Name
+		local player = Players:FindFirstChild(currentHunterName)
+		currentHunterHighlight = createESP(
+			player,
+			Color3.fromRGB(50, 255, 255), -- Bright Cyan
+			Color3.fromRGB(0, 0, 60),     -- Dark Blue
+			"HunterESP"
+		)
+	end
+end
+
+-- Plr ESP
+local function updateNormalPlayersESP()
+	for _, esp in pairs(normalPlayerHighlights) do
+		removeESP(esp)
+	end
+	normalPlayerHighlights = {}
+
+	if not PlayersESP then return end
+
+	for _, player in pairs(Players:GetPlayers()) do
+		if player ~= Players.LocalPlayer and player.Name ~= currentWolfName and player.Name ~= currentHunterName then
+			local esp = createESP(
+				player,
+				Color3.fromRGB(0, 255, 0), -- Bright Green
+				Color3.fromRGB(0, 60, 0),  -- Dark Green
+				"PlayerESP"
+			)
+			if esp then
+				table.insert(normalPlayerHighlights, esp)
+			end
+		end
+	end
+end
+
+Wolves.ChildAdded:Connect(function(child)
+	if child:IsA("IntValue") then task.wait(0.1) updateWolfESP() end
+end)
+Hunters.ChildAdded:Connect(function(child)
+	if child:IsA("IntValue") then task.wait(0.1) updateHunterESP() end
+end)
+Wolves.ChildRemoved:Connect(function(child)
+	if child:IsA("IntValue") then
+		removeESP(currentWolfHighlight)
+		currentWolfHighlight = nil
+		currentWolfName = nil
+	end
+end)
+Hunters.ChildRemoved:Connect(function(child)
+	if child:IsA("IntValue") then
+		removeESP(currentHunterHighlight)
+		currentHunterHighlight = nil
+		currentHunterName = nil
+	end
+end)
+
+-- Auto reload
+task.spawn(function()
+	while true do
+		if WolvesESP then updateWolfESP() else removeESP(currentWolfHighlight) end
+		if HuntersESP then updateHunterESP() else removeESP(currentHunterHighlight) end
+		if PlayersESP then updateNormalPlayersESP() end
+		task.wait(1)
+	end
+end)
+
+-- CrossBows & Silent Aim
+local BowWeapon = {
+	"DefaultCrossbow", "DoomcasterCrossbow", "EvilEnderCrossbow",
+	"ExperimentalCrossbow", "ExquisiteCrossbow", "MilitaryGradeCrossbow",
+	"MysticArbalest", "SavageBow", "SilverwarpBow", "TwinstringStriker"
+}
+
+-- Get Hunter and Wolf
+local function getHunterName()
+	local Hunters = ReplicatedStorage:FindFirstChild("Hunters")
+	if not Hunters then return nil end
+	local hunterValue = Hunters:FindFirstChildOfClass("IntValue")
+	return hunterValue and hunterValue.Name or nil
+end
+
+local function getWolf()
+	local Wolves = ReplicatedStorage:FindFirstChild("Wolves")
+	if not Wolves then return nil end
+	local wolfValue = Wolves:FindFirstChildOfClass("IntValue")
+	if not wolfValue or wolfValue.Name == "" then return nil end
+	local wolfPlayer = Players:FindFirstChild(wolfValue.Name)
+	if wolfPlayer and wolfPlayer.Character and wolfPlayer.Character:FindFirstChild("HumanoidRootPart") then
+		return wolfPlayer, wolfPlayer.Character.HumanoidRootPart
+	end
+	return nil
+end
+
+-- Equip bow from Backpack/Character
+local function getEquippedBow()
+	local Character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+	local Backpack = LocalPlayer:FindFirstChild("Backpack")
+	for _, name in ipairs(BowWeapon) do
+		if Character:FindFirstChild(name) then
+			return Character:FindFirstChild(name)
+		elseif Backpack and Backpack:FindFirstChild(name) then
+			Backpack[name].Parent = Character
+			return Character:WaitForChild(name)
+		end
+	end
+	return nil
+end
+
+-- Prediction
+local previousWolfPos = nil
+local previousTime = tick()
+
+local function getPredictedPosition(wolfHRP)
+	local currentPos = wolfHRP.Position
+	local currentTime = tick()
+	local deltaTime = currentTime - previousTime
+
+	local velocity = Vector3.zero
+	if previousWolfPos and deltaTime > 0 then
+		velocity = (currentPos - previousWolfPos) / deltaTime
+	end
+
+	previousWolfPos = currentPos
+	previousTime = currentTime
+
+	if not PredictionT then
+		return currentPos -- no prediction
+	end
+
+	local sidePrediction = Vector3.zero
+	local jumpPrediction = Vector3.zero
+
+	if math.abs(velocity.X) > math.abs(velocity.Z) then
+		sidePrediction = Vector3.new(PredictionOffset * (velocity.X > 0 and 1 or -1), 0, 0)
+	elseif math.abs(velocity.Z) > 1 then
+		sidePrediction = Vector3.new(0, 0, PredictionOffset * (velocity.Z > 0 and 1 or -1))
+	end
+
+	if velocity.Y > 1 then
+		jumpPrediction = Vector3.new(0, PredictionOffset, 0)
+	elseif velocity.Y < -1 then
+		jumpPrediction = Vector3.new(0, -PredictionOffset, 0)
+	end
+
+	return currentPos + sidePrediction + jumpPrediction
+end
+
+-- FIREBow
+local function fireBowAt(targetHRP)
+	local bow = getEquippedBow()
+	if not bow then
+		return warn("No bow equipped or found.")
+	end
+
+	local weaponEvent = bow:FindFirstChild("WeaponEvent")
+	if not weaponEvent then
+		return warn("WeaponEvent not found.")
+	end
+
+	local predictedPos = getPredictedPosition(targetHRP)
+
+	local args = {
+		[1] = "Fire",
+		[2] = predictedPos, -- Predicted aim
+		[3] = targetHRP     -- Actual hitbox part
+	}
+
+	weaponEvent:FireServer(unpack(args))
+end
+
+-- NonTeleport Shoot
+local function NormalShoot()
+	if getHunterName() ~= LocalPlayer.Name then
+		return warn("You're not the Hunter.")
+	end
+
+	local wolfPlayer, wolfHRP = getWolf()
+	if not wolfHRP then return warn("Wolf not found.") end
+
+	fireBowAt(wolfHRP)
+end
+
+-- TeleportShoot
+local function TeleportShoot()
+	if getHunterName() ~= LocalPlayer.Name then
+		return warn("You're not the Hunter.")
+	end
+
+	local wolfPlayer, wolfHRP = getWolf()
+	if not wolfHRP then return warn("Wolf not found.") end
+
+	-- Teleport behind
+	local char = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+	local hrp = char:WaitForChild("HumanoidRootPart")
+	hrp.CFrame = wolfHRP.CFrame * CFrame.new(0, 0, 6)
+
+	fireBowAt(wolfHRP)
+end
+
+-- BringBow
+local function GrabBowTp()
+    local CrossCFrame = CrossB.CFrame
+    local ReturnPOSITION = HRP.CFrame
+    wait()
+    HRP.CFrame = CrossCFrame * CFrame.new(0, 2, 0)
+    wait(0.4)
+    HRP.CFrame = ReturnPOSITION
+end
