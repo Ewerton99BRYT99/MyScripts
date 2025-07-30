@@ -1,0 +1,699 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/jensonhirst/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Color Or Die || 99 Hub -- BETA", HidePremium = false, SaveConfig = true, IntroEnabled = true, IntroText = "99 Hub", ConfigFolder = "OrionTest"})
+
+local ESPTab = Window:MakeTab({
+	Name = "ESP",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+local TPTab = Window:MakeTab({
+	Name = "Teleports & AutoFarm",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+--// Variables
+local BucketsESP = false
+local DoorsESP = false
+local UnlockableDoorESP = false
+local ToolESP = false
+local BrushesESP = false
+local MonsterESP = false
+
+local Players = game:GetService("Players")
+local LP = Players.LocalPlayer
+local CoreGui = game:GetService("CoreGui")
+
+-- Color Mapping
+local colorMap = {
+    Blue = Color3.fromRGB(0, 0, 255),
+    Green = Color3.fromRGB(0, 255, 0),
+    Orange = Color3.fromRGB(255, 165, 0),
+    Pink = Color3.fromRGB(255, 105, 180),
+    Purple = Color3.fromRGB(128, 0, 128),
+    Red = Color3.fromRGB(255, 0, 0),
+    Teal = Color3.fromRGB(0, 128, 128),
+    White = Color3.fromRGB(255, 255, 255),
+    Yellow = Color3.fromRGB(255, 255, 0),
+}
+
+local function darken(color)
+    return Color3.new(color.R * 0.4, color.G * 0.4, color.B * 0.4)
+end
+
+local function createBillboard(part, labelText, color)
+    if part:FindFirstChild("ESP_Billboard") then return end
+    local billboard = Instance.new("BillboardGui")
+    billboard.Name = "ESP_Billboard"
+    billboard.Size = UDim2.new(0, 60, 0, 20)
+    billboard.AlwaysOnTop = true
+    billboard.StudsOffset = Vector3.new(0, 3, 0)
+    billboard.Adornee = part
+
+    local label = Instance.new("TextLabel")
+    label.Size = UDim2.new(1, 0, 1, 0)
+    label.BackgroundTransparency = 1
+    label.TextColor3 = color
+    label.TextStrokeColor3 = darken(color)
+    label.TextStrokeTransparency = 0
+    label.Text = labelText
+    label.TextSize = 10
+    label.TextScaled = false
+    label.Font = Enum.Font.GothamBold
+    label.Parent = billboard
+
+    billboard.Parent = part
+end
+
+local function createHighlight(target, color)
+    if not target then return end
+    if CoreGui:FindFirstChild("ESP_Highlight_" .. target.Name) then return end
+
+    local highlight = Instance.new("Highlight")
+    highlight.Name = "ESP_Highlight_" .. target.Name
+    highlight.FillColor = color
+    highlight.OutlineColor = darken(color)
+    highlight.FillTransparency = 0.25
+    highlight.OutlineTransparency = 0
+    highlight.Adornee = target
+    highlight.Parent = CoreGui
+end
+
+-- ESP Setup Functions
+local function createTrackingESP(model, textSuffix, useHighlight, color)
+    local basePart = model.PrimaryPart or model:FindFirstChildWhichIsA("BasePart")
+    if not basePart then return end
+
+    createBillboard(basePart, model.Name .. " " .. textSuffix, color)
+    if useHighlight then
+        createHighlight(model, color)
+    end
+end
+
+-- Cleanup Functions
+local function clearESPFromFolder(folder)
+    for _, model in pairs(folder:GetChildren()) do
+        if model:IsA("Model") then
+            local part = model.PrimaryPart or model:FindFirstChildWhichIsA("BasePart")
+            if part then
+                local bb = part:FindFirstChild("ESP_Billboard")
+                if bb then bb:Destroy() end
+            end
+            local hl = CoreGui:FindFirstChild("ESP_Highlight_" .. model.Name)
+            if hl then hl:Destroy() end
+        end
+    end
+end
+
+local function clearBucketESP()
+    local folder = workspace.GameplayAssets.Items.Normal.PaintBucket
+    clearESPFromFolder(folder)
+end
+
+local function clearToolESP()
+    local folder = workspace.GameplayAssets.Items.Normal.Tool
+    clearESPFromFolder(folder)
+end
+
+local function clearBrushESP()
+    local folder = workspace.GameplayAssets.Items.Collectable.Collectable
+    clearESPFromFolder(folder)
+end
+
+local function clearDoorESP()
+    local folder = workspace.GameplayParts.Doors.Normal.Paintable
+    clearESPFromFolder(folder)
+end
+
+local function clearUnlockableDoorESP()
+    local folder = workspace.GameplayParts.Doors.Normal.Unlockable
+    clearESPFromFolder(folder)
+end
+
+local function clearMonsterESP()
+    local monster = workspace:FindFirstChild("GameplayAssets")
+        and workspace.GameplayAssets:FindFirstChild("Monsters")
+        and workspace.GameplayAssets.Monsters:FindFirstChild("Bill")
+    if monster then
+        local part = monster.PrimaryPart or monster:FindFirstChildWhichIsA("BasePart")
+        if part then
+            local bb = part:FindFirstChild("ESP_Billboard")
+            if bb then bb:Destroy() end
+        end
+        local hl = CoreGui:FindFirstChild("ESP_Highlight_" .. monster.Name)
+        if hl then hl:Destroy() end
+    end
+end
+
+-- Handlers
+local function handlePaintBuckets()
+    if not BucketsESP then clearBucketESP() return end
+    local folder = workspace.GameplayAssets.Items.Normal.PaintBucket
+    for _, model in pairs(folder:GetChildren()) do
+        local color = colorMap[model.Name]
+        if model:IsA("Model") and color then
+            createTrackingESP(model, "Bucket", true, color)
+        end
+    end
+end
+
+local function handleTools()
+    if not ToolESP then clearToolESP() return end
+    local folder = workspace.GameplayAssets.Items.Normal.Tool
+    for _, model in pairs(folder:GetChildren()) do
+        if model:IsA("Model") then
+            local gray = Color3.fromRGB(128, 128, 128)
+            createTrackingESP(model, "Tool", false, gray)
+        end
+    end
+end
+
+local function handleBrushes()
+    if not BrushesESP then clearBrushESP() return end
+    local folder = workspace.GameplayAssets.Items.Collectable.Collectable
+    for _, model in pairs(folder:GetChildren()) do
+        if model:IsA("Model") then
+            local white = Color3.fromRGB(255, 255, 255)
+            createTrackingESP(model, "Brush", false, white)
+        end
+    end
+end
+
+local function handlePaintableDoors()
+    if not DoorsESP then clearDoorESP() return end
+    local folder = workspace.GameplayParts.Doors.Normal.Paintable
+    for _, model in pairs(folder:GetChildren()) do
+        local color = colorMap[model.Name]
+        if model:IsA("Model") and color then
+            createTrackingESP(model, "Door", true, color)
+        end
+    end
+end
+
+local function handleUnlockableDoors()
+    if not UnlockableDoorESP then clearUnlockableDoorESP() return end
+    local folder = workspace.GameplayParts.Doors.Normal.Unlockable
+    for _, model in pairs(folder:GetChildren()) do
+        if model:IsA("Model") then
+            local gray = Color3.fromRGB(128, 128, 128)
+            createTrackingESP(model, "Unlockable", true, gray)
+        end
+    end
+end
+
+local function handleMonsterBill()
+    if not MonsterESP then clearMonsterESP() return end
+    local model = workspace:FindFirstChild("GameplayAssets")
+        and workspace.GameplayAssets:FindFirstChild("Monsters")
+        and workspace.GameplayAssets.Monsters:FindFirstChild("Bill")
+    if model and model:IsA("Model") then
+        local red = Color3.fromRGB(255, 0, 0)
+        createTrackingESP(model, "Monster", false, red)
+    end
+end
+
+-- Apply all ESPs
+local function runAllESP()
+    handlePaintBuckets()
+    handleTools()
+    handleBrushes()
+    handlePaintableDoors()
+    handleUnlockableDoors()
+    handleMonsterBill()
+end
+
+-- Reload ESPs on respawn
+LP.CharacterAdded:Connect(function()
+    task.delay(5, runAllESP)
+end)
+
+spawn(function()
+    local MonsterHigh = workspace.GameplayAssets.Monsters.Bill:FindFirstChild("Highlight")
+    if MonsterHigh or MonsterESP then
+        repeat
+            wait(0.3)
+            MonsterHigh.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+            MonsterHigh.FillColor = Color3.fromRGB(25, 25, 25)
+            MonsterHigh.FillTransparency = 0.5
+            MonsterHigh.OutlineColor = Color3.fromRGB(255, 0, 0)
+            MonsterHigh.OutlineTransparency = 0
+        until not MonsterHigh or MonsterESP
+    end
+end)
+
+--// Ui
+local ESPSection = ESPTab:AddSection({
+	Name = "ESP"
+})
+ESPTab:AddToggle({
+	Name = "Buckets ESP",
+	Default = false,
+	Callback = function(Value)
+		BucketsESP = Value
+    
+        if BucketsESP then
+            handlePaintBuckets()
+        else
+            clearBucketESP()
+        end
+	end    
+})
+ESPTab:AddToggle({
+	Name = "Tools ESP",
+	Default = false,
+	Callback = function(Value)
+		ToolESP = Value
+    
+        if ToolESP then
+            handleTools()
+        else
+            clearToolESP()
+        end
+	end    
+})
+ESPTab:AddToggle({
+	Name = "Brushes ESP",
+	Default = false,
+	Callback = function(Value)
+		BrushesESP = Value
+    
+        if BrushesESP then
+            handleBrushes()
+        else
+            clearBrushESP()
+        end
+	end    
+})
+ESPTab:AddToggle({
+	Name = "Paintable Doors ESP",
+	Default = false,
+	Callback = function(Value)
+		DoorsESP = Value
+    
+        if DoorsESP then
+            handlePaintableDoors()
+        else
+            clearDoorESP()
+        end
+	end    
+})
+ESPTab:AddToggle({
+	Name = "Unlockable Doors ESP",
+	Default = false,
+	Callback = function(Value)
+		UnlockableDoorESP = Value
+    
+        if UnlockableDoorESP then
+            handleUnlockableDoors()
+        else
+            clearUnlockableDoorESP()
+        end
+	end    
+})
+ESPTab:AddToggle({
+	Name = "Monster ESP",
+	Default = false,
+	Callback = function(Value)
+		MonsterESP = Value
+    
+        if MonsterESP then
+            handleMonsterBill()
+        else
+            clearMonsterESP()
+        end
+	end    
+})
+
+--// Teleports
+local Players = game:GetService("Players")
+local LP = Players.LocalPlayer
+local Char = LP.Character
+local hrp = Char.HumanoidRootPart
+
+local BucketTP = nil
+local PaintDoorTP = nil
+local ToolsTP = nil
+local UnlockableDoor = nil
+
+local TPSection = TPTab:AddSection({
+	Name = "Teleports"
+})
+TPTab:AddDropdown({
+	Name = "Buckets Teleport",
+	Default = nil,
+	Options = {"Red", "Yellow","Orange","Green","Pink","Blue","Purple","White","Teal"},
+	Callback = function(Value)
+		BucketTP = Value
+    
+        if BucketTP == "Red" then
+	        hrp.CFrame = workspace:FindFirstChild("GameplayAssets").Items.Normal.PaintBucket.Red.PaintRoot.CFrame
+	    elseif BucketTP == "Yellow" then
+	        hrp.CFrame = workspace.GameplayAssets.Items.Normal.PaintBucket.Yellow.PaintRoot.CFrame
+		elseif BucketTP == "Orange" then
+	        hrp.CFrame = workspace.GameplayAssets.Items.Normal.PaintBucket.Orange.PaintRoot.CFrame
+	    elseif BucketTP == "Green" then
+	        hrp.CFrame = workspace.GameplayAssets.Items.Normal.PaintBucket.Green.PaintRoot.CFrame
+	    elseif BucketTP == "Pink" then
+	        hrp.CFrame = workspace.GameplayAssets.Items.Normal.PaintBucket.Pink.PaintRoot.CFrame
+	    elseif BucketTP == "Blue" then
+	        hrp.CFrame = workspace.GameplayAssets.Items.Normal.PaintBucket.Blue.PaintRoot.CFrame
+	    elseif BucketTP == "Purple" then
+	        hrp.CFrame = workspace.GameplayAssets.Items.Normal.PaintBucket.Purple.PaintRoot.CFrame
+	    elseif BucketTP == "White" then
+	        hrp.CFrame = workspace.GameplayAssets.Items.Normal.PaintBucket.White.PaintRoot.CFrame
+	    elseif BucketTP == "Teal" then
+	        hrp.CFrame = workspace.GameplayAssets.Items.Normal.PaintBucket.Teal.PaintRoot.CFrame
+	    end
+	end    
+})
+TPTab:AddDropdown({
+	Name = "Paintable Doors Teleport",
+	Default = nil,
+	Options = {"Red", "Yellow","Orange","Green","Pink","Blue","Purple","White","Teal"},
+	Callback = function(Value)
+	    PaintDoorTP = Value
+	
+    if PaintDoorTP == "Red" then
+	    hrp.CFrame = CFrame.new(214.55, 2.67, 31.92)
+	elseif PaintDoorTP == "Yellow" then
+	    hrp.CFrame = CFrame.new(204.72, 2.67, -51.96)
+	elseif PaintDoorTP == "Orange" then
+	    hrp.CFrame = CFrame.new(273.29, 2.67, 41.71)
+	elseif PaintDoorTP == "Green" then
+	    hrp.CFrame = CFrame.new(325.46, 2.67, 88.25)
+	elseif PaintDoorTP == "Pink" then
+	    hrp.CFrame = CFrame.new(348.49, 2.67, 5.84)
+	elseif PaintDoorTP == "Blue" then
+	    hrp.CFrame = CFrame.new(286.94, 2.67, -125.4)
+	elseif PaintDoorTP == "Purple" then
+	    hrp.CFrame = CFrame.new(216.21, 2.67, -148.42)
+	elseif PaintDoorTP == "White" then
+	    hrp.CFrame = CFrame.new(-23.46, 2.67, 18.50)
+	elseif PaintDoorTP == "Teal" then
+	    hrp.CFrame = CFrame.new(834.26, 68.98, -598.13)
+	end
+	end    
+})
+TPTab:AddDropdown({
+	Name = "Tools Teleport",
+	Default = nil,
+	Options = {"Screwdriver", "Puzzle","Saw","Key","Hammer","Plank"},
+	Callback = function(Value)
+	    ToolsTP = Value
+	
+	    if ToolsTP == "Screwdriver" then
+		    hrp.CFrame = workspace.GameplayAssets.Items.Normal.Tool.ScrewDriver.Root.CFrame
+	    elseif ToolsTP == "Puzzle" then
+		    hrp.CFrame = workspace.GameplayAssets.Items.Normal.Tool.Puzzle.Root.CFrame
+	    elseif ToolsTP == "Saw" then
+		    hrp.CFrame = workspace.GameplayAssets.Items.Normal.Tool.Saw.Root.CFrame
+	    elseif ToolsTP == "Key" then
+		    hrp.CFrame = workspace.GameplayAssets.Items.Normal.Tool.Key.Root.CFrame
+	    elseif ToolsTP == "Hammer" then
+		    hrp.CFrame = workspace.GameplayAssets.Items.Normal.Tool.Hammer.Core.CFrame
+	    elseif ToolsTP == "Plank" then
+		    hrp.CFrame = workspace.GameplayAssets.Items.Normal.Tool.Plank.Root.CFrame
+	    end
+	end    
+})
+TPTab:AddDropdown({
+	Name = "Unlockable/Buildable Teleport",
+	Default = nil,
+	Options = {"Screwdriver", "Puzzle","Saw","Key","Hammer","Plank"},
+	Callback = function(Value)
+	    UnlockableDoor = Value
+	
+	    if UnlockableDoor == "Screwdriver" then
+            hrp.CFrame = CFrame.new(134.29, 2.67, 53.55)
+	    elseif UnlockableDoor == "Puzzle" then
+	        hrp.CFrame = CFrame.new(323.74, 2.67, 92.21)
+	    elseif UnlockableDoor == "Saw" then
+	        hrp.CFrame = CFrame.new(191.56, 2.67, -62.84)
+	    elseif UnlockableDoor == "Key" then
+	        hrp.CFrame = CFrame.new(710.42, 151.54, 325.22)
+	    elseif UnlockableDoor == "Hammer" then
+	        hrp.CFrame = CFrame.new(227.77, 2.67, 14.36)
+	    elseif UnlockableDoor == "Plank" then
+	        hrp.CFrame = CFrame.new(246.97, 27.63, -75.71)
+	    end
+	end    
+})
+
+-- // Services & Player Setup
+local Players = game:GetService("Players")
+local LP = Players.LocalPlayer
+local Character = LP.Character or LP.CharacterAdded:Wait()
+local HRP = Character:WaitForChild("HumanoidRootPart")
+local Humanoid = Character:WaitForChild("Humanoid")
+
+local AutoFarm = false
+local AutoReload = false
+
+-- // Utility: Retry full path resolution
+local function getSafePart(pathTable)
+	local timeout = 15
+	local start = tick()
+
+	while tick() - start < timeout do
+		local obj = workspace
+		local valid = true
+
+		for _, name in ipairs(pathTable) do
+			obj = obj:FindFirstChild(name)
+			if not obj then
+				valid = false
+				break
+			end
+		end
+
+		if valid and obj then
+			return obj
+		end
+
+		task.wait(0.2)
+	end
+
+	warn("❌ Timeout: Could not find", table.concat(pathTable, "."))
+	return nil
+end
+
+-- // Utility: Find teleport base part from any object
+local function getTeleportPart(target)
+	if not target then return nil end
+
+	if target:IsA("BasePart") then
+		return target
+	elseif target:IsA("Model") then
+		return target.PrimaryPart or target:FindFirstChildWhichIsA("BasePart", true)
+	elseif target:IsA("Folder") then
+		return target:FindFirstChildWhichIsA("BasePart", true)
+	else
+		for _, obj in ipairs(target:GetDescendants()) do
+			if obj:IsA("BasePart") then
+				return obj
+			end
+		end
+	end
+
+	return nil
+end
+
+-- // Utility: Safe teleport
+local function teleportTo(target)
+	local part = getTeleportPart(target)
+	if part then
+		HRP.CFrame = part.CFrame + Vector3.new(0, 5, 0)
+		task.wait(0.4)
+	else
+		warn("❌ teleportTo: No BasePart in", target and target:GetFullName() or "nil")
+	end
+end
+
+-- // Utility: Click detector until gone
+local function clickUntilGone(part)
+	local detector = part and part:FindFirstChildOfClass("ClickDetector")
+	if not detector then return end
+
+	local parent = part.Parent
+	if not parent then return end
+
+	local paintable = workspace.GameplayParts.Doors.Normal.Paintable
+	local unlockable = workspace.GameplayParts.Doors.Normal.Unlockable
+	local buildable = workspace.GameplayParts.Doors.Normal.Buildable
+
+	local expectedFolder
+	local useDetectorRemoval = false
+
+	if parent:IsDescendantOf(paintable) then
+		expectedFolder = paintable
+	elseif parent:IsDescendantOf(unlockable) then
+		expectedFolder = unlockable
+	elseif parent:IsDescendantOf(buildable) then
+		useDetectorRemoval = true -- custom logic for plank
+	else
+		warn("⚠️ Door parent not in Paintable/Unlockable/Buildable:", parent:GetFullName())
+		return
+	end
+
+	repeat
+		fireclickdetector(detector)
+		task.wait(0.25)
+
+		if useDetectorRemoval then
+			detector = part:FindFirstChildOfClass("ClickDetector")
+		end
+	until useDetectorRemoval and not detector or not useDetectorRemoval and not (part.Parent and part.Parent:IsDescendantOf(expectedFolder))
+end
+
+-- // Utility: Proximity prompt
+local function proximityPrompt(part)
+	if not part then return end
+
+	local prompt = part:FindFirstChildWhichIsA("ProximityPrompt", true)
+	if not prompt then return end
+
+	local parent = part.Parent
+	if not parent then return end
+
+	local toolFolder = workspace.GameplayAssets.Items.Normal.Tool
+	local bucketFolder = workspace.GameplayAssets.Items.Normal.PaintBucket
+	local collectableFolder = workspace.GameplayAssets.Items.Collectable.Collectable
+
+	local expectedFolder
+	if parent:IsDescendantOf(toolFolder) then
+		expectedFolder = toolFolder
+	elseif parent:IsDescendantOf(bucketFolder) then
+		expectedFolder = bucketFolder
+	elseif parent:IsDescendantOf(collectableFolder) then
+		expectedFolder = collectableFolder
+	else
+		warn("⚠️ Proximity object not in Tool/Bucket/Collectable:", parent:GetFullName())
+		return
+	end
+
+	repeat
+		if prompt.Enabled then
+			fireproximityprompt(prompt, 1)
+		end
+		task.wait(0.25)
+	until not (part.Parent and part.Parent:IsDescendantOf(expectedFolder))
+end
+
+-- // Step List
+local steps = {
+	{"click", {"GameplayParts", "Doors", "Normal", "Paintable", "Black", "Core"}},
+	{"prompt", {"GameplayAssets", "Items", "Normal", "PaintBucket", "Red", "Root"}},
+	{"click", {"GameplayParts", "Doors", "Normal", "Paintable", "Red", "Core"}},
+	{"prompt", {"GameplayAssets", "Items", "Normal", "Tool", "ScrewDriver", "Root"}},
+	{"click", {"GameplayParts", "Doors", "Normal", "Unlockable", "ScrewDriver", "Core"}},
+	{"prompt", {"GameplayAssets", "Items", "Normal", "PaintBucket", "Orange", "Root"}},
+	{"click", {"GameplayParts", "Doors", "Normal", "Paintable", "Orange", "Core"}},
+	{"prompt", {"GameplayAssets", "Items", "Normal", "PaintBucket", "Yellow", "Root"}},
+	{"click", {"GameplayParts", "Doors", "Normal", "Paintable", "Yellow", "Core"}},
+	{"prompt", {"GameplayAssets", "Items", "Normal", "PaintBucket", "Green", "Root"}},
+	{"click", {"GameplayParts", "Doors", "Normal", "Paintable", "Green", "Core"}},
+	{"prompt", {"GameplayAssets", "Items", "Normal", "PaintBucket", "Teal", "Root"}},
+	{"click", {"GameplayParts", "Doors", "Normal", "Paintable", "Teal", "Core"}},
+	{"prompt", {"GameplayAssets", "Items", "Normal", "Tool", "Puzzle", "Root"}},
+	{"click", {"GameplayParts", "Doors", "Normal", "Unlockable", "Puzzle", "Core"}},
+	{"prompt", {"GameplayAssets", "Items", "Normal", "PaintBucket", "Blue", "Root"}},
+	{"click", {"GameplayParts", "Doors", "Normal", "Paintable", "Blue", "Core"}},
+	{"prompt", {"GameplayAssets", "Items", "Normal", "Tool", "Saw", "Root"}},
+	{"click", {"GameplayParts", "Doors", "Normal", "Unlockable", "Saw", "Core"}},
+	{"prompt", {"GameplayAssets", "Items", "Normal", "Tool", "Plank", "Root"}},
+	{"prompt", {"GameplayAssets", "Items", "Normal", "PaintBucket", "Purple", "Root"}},
+	{"click", {"GameplayParts", "Doors", "Normal", "Paintable", "Purple", "Core"}},
+	{"click", {"GameplayParts", "Doors", "Normal", "Buildable", "Plank", "Core"}},
+	{"prompt", {"GameplayAssets", "Items", "Normal", "Tool", "Hammer", "Root"}},
+	{"click", {"GameplayParts", "Doors", "Normal", "Unlockable", "Hammer", "Core"}},
+	{"prompt", {"GameplayAssets", "Items", "Normal", "PaintBucket", "Pink", "Root"}},
+	{"click", {"GameplayParts", "Doors", "Normal", "Paintable", "Pink", "Core"}},
+	{"prompt", {"GameplayAssets", "Items", "Normal", "Tool", "Key", "Root"}},
+	{"click", {"GameplayParts", "Doors", "Normal", "Unlockable", "Key", "Core"}}
+}
+
+-- // Add Collectables 1 to 13
+for i = 1, 13 do
+	table.insert(steps, {"prompt", {"GameplayAssets", "Items", "Collectable", "Collectable", tostring(i), "Root"}})
+end
+
+-- // Final Steps
+table.insert(steps, {"prompt", {"GameplayAssets", "Items", "Normal", "PaintBucket", "White", "Root"}})
+table.insert(steps, {"click", {"GameplayParts", "Doors", "Normal", "Paintable", "White", "Core"}})
+table.insert(steps, {"wait15kill", {"GameplayParts", "EndRooms", "VisualAssets", "EndingDoor3", "Core"}})
+
+-- // Execute Steps
+task.spawn(function()
+	while true do
+		repeat task.wait() until AutoFarm == true
+
+		local Players = game:GetService("Players")
+		local LP = Players.LocalPlayer
+		local Character = LP.Character or LP.CharacterAdded:Wait()
+		local HRP = Character:WaitForChild("HumanoidRootPart")
+		local Humanoid = Character:WaitForChild("Humanoid")
+
+		for _, step in ipairs(steps) do
+			if not AutoFarm then break end
+
+			local action, path = step[1], step[2]
+			local target = getSafePart(path)
+
+			if target then
+				teleportTo(target)
+
+				if action == "click" then
+					clickUntilGone(target)
+				elseif action == "prompt" then
+					proximityPrompt(target)
+				elseif action == "wait15kill" then
+					task.wait(15)
+					Humanoid.Health = 0
+				end
+			else
+				warn("❌ Missing: " .. table.concat(path, "."))
+			end
+		end
+	end
+end)
+
+--// Enable
+local AutoSection = TPTab:AddSection({
+	Name = "AutoFarm"
+})
+local FarmToggle = TPTab:AddToggle({
+	Name = "AutoFarm",
+	Default = false,
+	Callback = function(Value)
+		AutoFarm = Value
+	end    
+})
+ESPTab:AddToggle({
+	Name = "Auto Reload",
+	Default = false,
+	Callback = function(Value)
+		AutoReload = Value
+
+        if AutoReload then
+            task.spawn(function()
+                repeat
+                    task.wait(0.2)
+
+                    local player = game:GetService("Players").LocalPlayer
+                    local endScreen = player:WaitForChild("PlayerGui"):WaitForChild("MainGui").FullScreen.EndScreen
+
+                    if endScreen.Visible == true then
+                        repeat
+                            task.wait()
+                        until endScreen.Visible == false
+
+                -- Toggle OFF then ON
+                    FarmToggle.Callback(false)
+                    task.wait(0.3)
+                    FarmToggle.Callback(true)
+                    end
+                until not AutoReload
+            end)
+        end
+	end    
+})
