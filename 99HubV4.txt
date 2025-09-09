@@ -1,0 +1,1088 @@
+local WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/latest/download/main.lua"))()
+local Window = WindUI:CreateWindow({
+    Title = "99 Hub V4 || BETA || Flee The Facility",
+    Icon = "door-open",
+    Author = "By Ewerton99",
+    Folder = "TESTER"
+})
+
+--// Variables //
+local podstoggle = false
+local pctoggle = false
+local pctoggle2 = false
+local playertoggle = false
+local bestpctoggle = false
+local exitstoggle = false
+local nametoggle = false
+local outlinetoggle = false
+
+local updateDelay = 0.1
+
+local neverfailtoggle = false
+local neverfailhack = false
+local autointeracttoggle = false
+local autoplaytoggle = false
+local slowbeast = false
+local removerope = false
+local forceability = false
+
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+local RunService = game:GetService("RunService")
+local Camera = workspace.CurrentCamera
+local PlayerFrame = LocalPlayer.PlayerGui.ScreenGui.PlayerNamesFrame:FindFirstChild(LocalPlayer.Name .. "PlayerFrame")
+local NameLabel = PlayerFrame:FindFirstChild("NameLabel")
+local LevelLabel = PlayerFrame:FindFirstChild("LevelLabel")
+local CreditsChanger = game:GetService("Players").LocalPlayer.SavedPlayerStatsModule.Credits
+local BeastChance = game:GetService("Players").LocalPlayer.SavedPlayerStatsModule.BeastChance
+local XpChanger = game:GetService("Players").LocalPlayer.SavedPlayerStatsModule.Xp
+
+local beastcolor = Color3.fromRGB(255, 45, 45)
+local beastoutline = Color3.fromRGB(25, 0, 0)
+
+local survivorcolor = Color3.fromRGB(45, 255, 45)
+local survivoroutline = Color3.fromRGB(0, 25, 0)
+
+--// Notify //
+WindUI:Notify({
+    Title = "BETA",
+    Content = "This Script Is On Beta\nIf You Find Any Error/Bug\nReport It To Me",
+    Duration = 6, -- 3 seconds
+    Icon = "bird",
+})
+--// Tabs //
+local HomeTab = Window:Tab({
+    Title = "Home & Changelogs ",
+    Icon = "house",
+    Locked = false,
+})
+local ESPTABSection = Window:Section({
+    Title = "Visuals",
+    Icon = "eye",
+    Opened = true,
+})
+local VisualsTab = ESPTABSection:Tab({
+    Title = "Visuals",
+    Icon = "eye",
+    Locked = false,
+})
+local EspConfigTab = ESPTABSection:Tab({
+    Title = "ESP Settings",
+    Icon = "settings",
+    Locked = false,
+})
+local NBeastTab = Window:Tab({
+    Title = "Non-Beast",
+    Icon = "users",
+    Locked = false,
+})
+local BeastTab = Window:Tab({
+    Title = "Beast",
+    Icon = "user",
+    Locked = false,
+})
+local TrollTab = Window:Tab({
+    Title = "Trolling",
+    Icon = "flame",
+    Locked = false,
+})
+local KeybindsTab = Window:Tab({
+    Title = "Keybinds",
+    Icon = "keyboard",
+    Locked = false,
+})
+local PlayerTab = Window:Tab({
+    Title = "Player",
+    Icon = "user-cog",
+    Locked = false,
+})
+local CreditsTab = Window:Tab({
+    Title = "Credits",
+    Icon = "user-pen",
+    Locked = false,
+})
+
+--// Home & Changelogs Labels Sections //
+local WelcomeSection = HomeTab:Section({ 
+    Title = "Welcome || "..game.Players.LocalPlayer.Name,
+    TextXAlignment = "Left",
+    TextSize = 18, -- Default Size
+})
+local ChangelogSection = HomeTab:Section({ 
+    Title = "Changelogs:",
+    TextXAlignment = "Left",
+    TextSize = 18, -- Default Size
+})
+local V1Section = HomeTab:Section({ 
+    Title = "V1 | Start Of The Script",
+    TextXAlignment = "Left",
+    TextSize = 16, -- Default Size
+})
+local V15Section = HomeTab:Section({ 
+    Title = "V1.5 | Added Tracers Esp | Added Outline Esp | Others Scripts | And More",
+    TextXAlignment = "Left",
+    TextSize = 16, -- Default Size
+})
+local V2Section = HomeTab:Section({ 
+    Title = "V2 | Removed Tracer Esp | Outline Esp Bugged | Remake Of Choose Device Gui",
+    TextXAlignment = "Left",
+    TextSize = 16, -- Default Size
+})
+local V25Section = HomeTab:Section({ 
+    Title = "V2.5 | Changed The Ui To Luna Ui | Added Trolling Tab | Added NoFailHack V2 | Fixed Outline Esp Not Being Able to Disable | Removed Choose Device Gui | Sadly Removed Keybinds",
+    TextXAlignment = "Left",
+    TextSize = 16, -- Default Size
+})
+local V3Section = HomeTab:Section({ 
+    Title = "V3 | Added Colorpicker for PlayerESP | Removed Trolling Tab | Remake TracersESP | Added BoxESP",
+    TextXAlignment = "Left",
+    TextSize = 16, -- Default Size
+})
+local V31Section = HomeTab:Section({ 
+    Title = "V3.1 | Removed BoxESP (It Was Only Working in 1 Player) | Added Back Trolling Tab",
+    TextXAlignment = "Left",
+    TextSize = 16, -- Default Size
+})
+local V32Section = HomeTab:Section({ 
+    Title = "V3.2 | Added Pc TracersESP | Added Name & Level Changer",
+    TextXAlignment = "Left",
+    TextSize = 16, -- Default Size
+})
+local V35Section = HomeTab:Section({ 
+    Title = "V3.5 | Removed PC Tracers ESP | Removed Player Tracers ESP | Improved ESP Colors | Remake NameESP | 99 Hub Is Back",
+    TextXAlignment = "Left",
+    TextSize = 16, -- Default Size
+})
+local V4Section = HomeTab:Section({ 
+    Title = "V4 (Current) | Changes Ui To Wind Ui | Added Back Keybinds Tab | Visuals Tab | Coins Changer | Chance Changer | Xp Changer | Remaked NameESP",
+    TextXAlignment = "Left",
+    TextSize = 16, -- Default Size
+})
+
+--// Credits //
+local CreditsSection = CreditsTab:Section({ 
+    Title = "Credits",
+    TextXAlignment = "Left",
+    TextSize = 18, -- Default Size
+})
+local EwertonParagraph = CreditsTab:Paragraph({
+    Title = "Ewerton99",
+    Desc = "Created This Hub & ESP Settings & Outline ESP & Name ESP & Pc ESP V2 & Neverfailhack V2 & Changes & Keybinds, Etc",
+    Color = "Grey",
+    Image = "",
+    ImageSize = 30,
+    Thumbnail = "",
+    ThumbnailSize = 80,
+    Locked = false,
+    Buttons = {
+        {
+            Icon = "bird",
+            Title = "Button",
+            Callback = function() print("1 Button") end,
+        }
+    }
+})
+local ftfhaxParagraph = CreditsTab:Paragraph({
+    Title = "FtfHax",
+    Desc = "Normal ESP & Neverfailhack V1",
+    Color = "Grey",
+    Image = "",
+    ImageSize = 30,
+    Thumbnail = "",
+    ThumbnailSize = 80,
+    Locked = false,
+    Buttons = {
+        {
+            Icon = "bird",
+            Title = "Button",
+            Callback = function() print("1 Button") end,
+        }
+    }
+})
+local OlympiaParagraph = CreditsTab:Paragraph({
+    Title = "Olympia",
+    Desc = "Trolling Features",
+    Color = "Grey",
+    Image = "",
+    ImageSize = 30,
+    Thumbnail = "",
+    ThumbnailSize = 80,
+    Locked = false,
+    Buttons = {
+        {
+            Icon = "bird",
+            Title = "Button",
+            Callback = function() print("1 Button") end,
+        }
+    }
+})
+local RaisincainsParagraph = CreditsTab:Paragraph({
+    Title = "Raisincains",
+    Desc = "Beast Features",
+    Color = "Grey",
+    Image = "",
+    ImageSize = 30,
+    Thumbnail = "",
+    ThumbnailSize = 80,
+    Locked = false,
+    Buttons = {
+        {
+            Icon = "bird",
+            Title = "Button",
+            Callback = function() print("1 Button") end,
+        }
+    }
+})
+
+--// Ui //
+local VisualSection = VisualsTab:Section({ 
+    Title = "Visual",
+    TextXAlignment = "Left",
+    TextSize = 17, -- Default Size
+})
+local Input = VisualsTab:Input({
+    Title = "Coins Changer",
+    Desc = "It's ClientSided, Not Server-Sided",
+    Value = CreditsChanger.Value,
+    InputIcon = "eye",
+    Type = "Input", -- or "Textarea"
+    Placeholder = CreditsChanger.Value,
+    Callback = function(input) 
+        CreditsChanger.Value = input
+    end
+})
+local Input = VisualsTab:Input({
+    Title = "Beast Chance Changer",
+    Desc = "It's ClientSided, Not Server-Sided",
+    Value = BeastChance.Value,
+    InputIcon = "eye",
+    Type = "Input", -- or "Textarea"
+    Placeholder = BeastChance.Value,
+    Callback = function(input) 
+        BeastChance.Value = input
+    end
+})
+local Input = VisualsTab:Input({
+    Title = "XP Changer",
+    Desc = "It's ClientSided, Not Server-Sided",
+    Value = XpChanger.Value,
+    InputIcon = "eye",
+    Type = "Input", -- or "Textarea"
+    Placeholder = XpChanger.Value,
+    Callback = function(input) 
+        XpChanger.Value = input
+    end
+})
+
+--// ESP //
+local EspSection = VisualsTab:Section({ 
+    Title = "ESP",
+    TextXAlignment = "Left",
+    TextSize = 17, -- Default Size
+})
+local Toggle = VisualsTab:Toggle({
+    Title = "PlayerESP",
+    Desc = "ESP",
+    Icon = "eye",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state) 
+        playertoggle = state
+        reloadESP()
+    end
+})
+local Toggle = VisualsTab:Toggle({
+    Title = "PlayerOutline ESP",
+    Desc = "ESP",
+    Icon = "eye",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state) 
+        outlinetoggle = state
+        outlineESP()
+    end
+})
+local Toggle = VisualsTab:Toggle({
+    Title = "Player NameESP",
+    Desc = "ESP",
+    Icon = "eye",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state) 
+        nametoggle = state
+        reloadnameESP()
+    end
+})
+local EspMapSection = VisualsTab:Section({ 
+    Title = "Map ESP",
+    TextXAlignment = "Left",
+    TextSize = 17, -- Default Size
+})
+local Toggle = VisualsTab:Toggle({
+    Title = "Pc ESP",
+    Desc = "ESP",
+    Icon = "eye",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state) 
+        pctoggle = state
+        reloadESP()
+    end
+})
+local Toggle = VisualsTab:Toggle({
+    Title = "Pc ESP V2",
+    Desc = "ESP",
+    Icon = "eye",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state) 
+        pctoggle2 = state
+        reloadPCESP()
+    end
+})
+local Toggle = VisualsTab:Toggle({
+    Title = "BestPc ESP",
+    Desc = "ESP",
+    Icon = "eye",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state) 
+        bestpctoggle = state
+        reloadESP()
+    end
+})
+local Toggle = VisualsTab:Toggle({
+    Title = "FreezePod ESP",
+    Desc = "ESP",
+    Icon = "eye",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state) 
+        podstoggle = state
+        reloadESP()
+    end
+})
+local Toggle = VisualsTab:Toggle({
+    Title = "ExitDoor ESP",
+    Desc = "ESP",
+    Icon = "eye",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state) 
+        exitstoggle = state
+        reloadESP()
+    end
+})
+
+--// ESP Config //
+local Colorpicker = VisualsTab:Colorpicker({
+    Title = "Beast ESP Color",
+    Desc = "Beast Color",
+    Default = Color3.fromRGB(255, 45, 45),
+    Transparency = 0,
+    Locked = false,
+    Callback = function(color) 
+        beastcolor = color
+    end
+})
+local Colorpicker = VisualsTab:Colorpicker({
+    Title = "Beast OutlineColor",
+    Desc = "Color",
+    Default = Color3.fromRGB(0, 25, 0),
+    Transparency = 0,
+    Locked = false,
+    Callback = function(color) 
+        beastoutline = color
+    end
+})
+local Colorpicker = VisualsTab:Colorpicker({
+    Title = "Survivor ESP Color",
+    Desc = "Color",
+    Default = Color3.fromRGB(45, 255, 45),
+    Transparency = 0,
+    Locked = false,
+    Callback = function(color) 
+        survivorcolor = color
+    end
+})
+local Colorpicker = VisualsTab:Colorpicker({
+    Title = "Survivor OutlineColor",
+    Desc = "Color",
+    Default = Color3.fromRGB(0, 25, 0),
+    Transparency = 0,
+    Locked = false,
+    Callback = function(color) 
+        survivoroutline = color
+    end
+})
+
+--// Non-Beast //
+local Toggle = NBeastTab:Toggle({
+    Title = "NeverFailHack V1",
+    Desc = "NoFail",
+    Icon = "laptop-minimal-check",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state) 
+        neverfailtoggle = state
+    end
+})
+local Toggle = NBeastTab:Toggle({
+    Title = "NeverFailHack V2",
+    Desc = "NoFail",
+    Icon = "laptop-minimal-check",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state) 
+        neverfailhack = state
+    end
+})
+
+--// Beast //
+local Button = BeastTab:Button({
+    Title = "NoSlow",
+    Desc = "No Slow When Jump",
+    Locked = false,
+    Callback = function()
+        if game.Players.LocalPlayer.TempPlayerStatsModule.IsBeast.Value == true then
+            pcall(function()
+                game.Players.LocalPlayer.Character.PowersLocalScript:Destroy()
+            end)
+        end
+    end
+})
+local Button = BeastTab:Button({
+    Title = "UnlockCamera",
+    Desc = "Unlocks Câmera From First Person",
+    Locked = false,
+    Callback = function()
+        local player = game.Players.LocalPlayer
+
+	    workspace.CurrentCamera.CameraSubject = player.Character:FindFirstChildWhichIsA('Humanoid')
+	    workspace.CurrentCamera.CameraType = "Custom"
+	    player.CameraMinZoomDistance = 0.5
+	    player.CameraMaxZoomDistance = math.huge
+	    player.CameraMode = "Classic"
+	    player.Character.Head.Anchored = false
+    end
+})
+local Button = BeastTab:Button({
+    Title = "Remove Gem & Glow",
+    Desc = "Remove Gems&Glow&Music",
+    Locked = false,
+    Callback = function()
+        if game.Players.LocalPlayer.TempPlayerStatsModule.IsBeast.Value == true then
+            for i,v in pairs(game.Players.LocalPlayer.Character.Hammer.Handle:GetChildren()) do
+                if v:IsA("Sound") then
+                    pcall(function()
+                        v:Destroy()
+                    end)
+                end
+            end
+
+            pcall(function()
+                game.Players.LocalPlayer.Character.Gemstone.Handle.PointLight:Destroy()
+            end)
+        end
+    end
+})
+
+--// Trolling //
+local Toggle = TrollTab:Toggle({
+    Title = "Slow Beast",
+    Desc = "Slows the Beast",
+    Icon = "laptop-minimal-check",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state) 
+        slowbeast = Value
+    end
+})
+local Toggle = TrollTab:Toggle({
+    Title = "Remove Rope",
+    Desc = "Remove The Rope",
+    Icon = "laptop-minimal-check",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state) 
+        removerope = Value
+    end
+})
+local Toggle = TrollTab:Toggle({
+    Title = "ForceBeast Ability",
+    Desc = "Force Ability",
+    Icon = "laptop-minimal-check",
+    Type = "Toggle",
+    Default = false,
+    Callback = function(state) 
+        forceability = Value
+    end
+})
+
+--// Keybinds //
+local Keybind = KeybindsTab:Keybind({
+    Title = "PlayerESP",
+    Desc = "Keybind to open ui",
+    Value = "F",
+    Callback = function(v)
+        if playertoggle = false then
+            playertoggle = true
+            reloadESP()
+        else
+            playertoggle = false
+            reloadESP()
+        end
+    end
+})
+local Keybind = KeybindsTab:Keybind({
+    Title = "PlayerOutline ESP",
+    Desc = "Keybind to open ui",
+    Value = "G",
+    Callback = function(v)
+        if outlinetoggle = false then
+            outlinetoggle = true
+            outlineESP()
+        else
+            outlinetoggle = false
+            outlineESP()
+        end
+    end
+})
+local Keybind = KeybindsTab:Keybind({
+    Title = "NameESP",
+    Desc = "Keybind to open ui",
+    Value = "K",
+    Callback = function(v)
+        if nametoggle = false then
+            nametoggle = true
+            reloadnameESP()
+        else
+            nametoggle = false
+            reloadnameESP()
+        end
+    end
+})
+local Keybind = KeybindsTab:Keybind({
+    Title = "PC ESP",
+    Desc = "Keybind to open ui",
+    Value = "G",
+    Callback = function(v)
+        if pctoggle = false then
+            pctoggle = true
+            reloadESP()
+        else
+            pctoggle = false
+            reloadESP()
+        end
+    end
+})
+local Keybind = KeybindsTab:Keybind({
+    Title = "PC ESP V2",
+    Desc = "Keybind to open ui",
+    Value = "G",
+    Callback = function(v)
+        if pctoggle2 = false then
+            pctoggle2 = true
+            reloadPCESP()
+        else
+            pctoggle2 = false
+            reloadPCESP()
+        end
+    end
+})
+local Keybind = KeybindsTab:Keybind({
+    Title = "FreezePod ESP",
+    Desc = "Keybind to open ui",
+    Value = "G",
+    Callback = function(v)
+        if podstoggle = false then
+            podstoggle = true
+            reloadESP()
+        else
+            podstoggle = false
+            reloadESP()
+        end
+    end
+})
+local Keybind = KeybindsTab:Keybind({
+    Title = "NeverfailHack V1 ",
+    Desc = "Keybind to open ui",
+    Value = "G",
+    Callback = function(v)
+        if neverfailtoggle = false then
+            neverfailtoggle = true
+        else
+            neverfailtoggle = false
+        end
+    end
+})
+local Keybind = KeybindsTab:Keybind({
+    Title = "Slow Beast",
+    Desc = "Keybind to open ui",
+    Value = "G",
+    Callback = function(v)
+        if slowbeast = false then
+            slowbeast = true
+        else
+            slowbeast = false
+        end
+    end
+})
+local Keybind = KeybindsTab:Keybind({
+    Title = "Remove Rope",
+    Desc = "Keybind to open ui",
+    Value = "G",
+    Callback = function(v)
+        if removerope = false then
+            removerope = true
+        else
+            removerope = false
+        end
+    end
+})
+local Keybind = KeybindsTab:Keybind({
+    Title = "ForceBeast Ability",
+    Desc = "Keybind to open ui",
+    Value = "G",
+    Callback = function(v)
+        if forceability = false then
+            forceability = true
+        else
+            forceability = false
+        end
+    end
+})
+
+--// Player //
+local Slider = PlayerTab:Slider({
+    Title = "WalkSpeed",
+    
+    -- To make float number supported, 
+    -- make the Step a float number.
+    -- example: Step = 0.1
+    Step = 1,
+    
+    Value = {
+        Min = 14,
+        Max = 500,
+        Default = game.Players.LocalPlayer.Character.Humanoid.WalkSpeed,
+    },
+    Callback = function(value)
+        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = value
+    end
+})
+local Slider = PlayerTab:Slider({
+    Title = "JumpPower",
+    
+    -- To make float number supported, 
+    -- make the Step a float number.
+    -- example: Step = 0.1
+    Step = 1,
+    
+    Value = {
+        Min = 20,
+        Max = 550,
+        Default = game.Players.LocalPlayer.Character.Humanoid.JumpPower,
+    },
+    Callback = function(value)
+        game.Players.LocalPlayer.Character.Humanoid.JumpPower = value
+    end
+})
+
+--// Functions //
+function reloadESP()
+	spawn(function()
+		local map = game.ReplicatedStorage.CurrentMap.Value
+		if map ~= nil then
+		local mapstuff = map:getChildren()
+		for i=1,#mapstuff do
+			if mapstuff[i].Name == "ComputerTable" then
+				if mapstuff[i]:findFirstChild("Highlight") and not pctoggle then
+					mapstuff[i].Highlight:remove()
+				end
+				if pctoggle and not mapstuff[i]:findFirstChild("Highlight") then
+					local a = Instance.new("Highlight", mapstuff[i])
+					a.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+					a.FillColor = Color3.fromRGB(13, 105, 172) -- avoid display bugs as soon as loads :)
+					a.OutlineColor = Color3.fromRGB(20, 165, 270) -- avoid display bugs as soon as loads :)
+					spawn(function()
+						repeat 
+							if bestpctoggle and mapstuff[i]:findFirstChild("Screen") then
+								if getBestPC()[1].pc ~= nil and mapstuff[i] == getBestPC()[1].pc then
+									a.FillColor = mapstuff[i]:findFirstChild("Screen").Color
+									a.OutlineColor = Color3.fromRGB(20, 125, 255)
+								else
+									a.FillColor = mapstuff[i]:findFirstChild("Screen").Color
+									a.OutlineColor = Color3.fromRGB(0, 0, 55)
+								end
+							else
+								a.FillColor = mapstuff[i]:findFirstChild("Screen").Color
+								a.OutlineColor = Color3.fromRGB(0, 0, 55)
+							end
+							wait(1)
+						until mapstuff[i] == nil or a == nil
+					end)
+				end
+			end
+			if mapstuff[i].Name == "FreezePod" then
+				if mapstuff[i]:findFirstChild("Highlight") and not podstoggle then
+					mapstuff[i].Highlight:remove()
+				end
+				if podstoggle and not mapstuff[i]:findFirstChild("Highlight") then
+					local a = Instance.new("Highlight", mapstuff[i])
+					a.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+					a.FillColor = Color3.fromRGB(100,100,255)
+					a.OutlineColor = Color3.fromRGB(0,0,25)
+				end
+			end
+			if mapstuff[i].Name == "ExitDoor" then
+				if mapstuff[i]:findFirstChild("Highlight") and not exitstoggle then
+					mapstuff[i].Highlight:remove()
+				end
+				if exitstoggle and not mapstuff[i]:findFirstChild("Highlight") then
+					local a = Instance.new("Highlight", mapstuff[i])
+					a.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+					a.FillColor = Color3.fromRGB(252, 255, 100)
+					a.OutlineColor = Color3.fromRGB(25,25,5)
+				end
+			end
+			end
+			end
+	end)
+	local player = game.Players:GetChildren()
+	for i=1, #player do
+		if player[i] ~= game.Players.LocalPlayer and player[i].Character ~= nil then
+		local character = player[i].Character
+		if character:findFirstChild("Highlight") and not playertoggle then
+			character.Highlight:remove()
+		end
+		if playertoggle and not character:findFirstChild("Highlight") then
+			local a = Instance.new("Highlight", character)
+			a.DepthMode = Enum.HighlightDepthMode.AlwaysOnTop
+			a.FillColor = Color3.fromRGB(0,255,0) -- avoid display bugs as soon as loads :)
+			a.OutlineColor = Color3.fromRGB(127,255,127) -- avoid display bugs as soon as loads :)
+			spawn(function()
+				repeat
+					wait(0.1)
+					if player[i] == getBeast() then
+						a.FillColor = beastcolor
+						a.OutlineColor = beastoutline
+					else
+						a.FillColor = survivorcolor
+						a.OutlineColor = survivoroutline
+					end
+				until character == nil or a == nil
+			end)
+			end
+			end
+	end
+end
+
+function GetBeast()
+	local PlayersService = game:FindFirstChildOfClass("Players")
+	if not PlayersService then
+		warn("Players service not found!")
+		return nil
+	end
+
+	local allPlayers = PlayersService:GetPlayers()
+	for _, plr in ipairs(allPlayers) do
+		local character = plr.Character
+		local stats = plr:FindFirstChild("TempPlayerStatsModule")
+		local isBeast = stats and stats:FindFirstChild("IsBeast")
+
+		if (isBeast and isBeast.Value == true) or (character and character:FindFirstChild("BeastPowers")) then
+			return plr
+		end
+	end
+
+	return nil -- no beast found
+end
+
+function reloadPCESP()
+    spawn(function()
+        local map = game.ReplicatedStorage.CurrentMap.Value
+        if map ~= nil then
+            local mapstuff = map:GetChildren()
+            for i = 1, #mapstuff do
+                if mapstuff[i].Name == "ComputerTable" then
+                    local Screen = mapstuff[i]:FindFirstChild("Screen")
+                    local Billboard = Screen and Screen:FindFirstChild("BillboardGui")
+                    local ImageLabel = Billboard and Billboard:FindFirstChild("ImageLabel")
+
+                    if Billboard and ImageLabel then
+                        if pctoggle2 == false then
+                            Billboard.Enabled = false
+                            Billboard.Active = false
+                            ImageLabel.Active = false
+                        elseif pctoggle2 == true and not Billboard.Enabled then
+                            Billboard.Enabled = true
+                            Billboard.Active = true
+                            ImageLabel.Active = true
+                            ImageLabel.ImageColor3 = Color3.fromRGB(20, 20, 195)
+
+                            spawn(function()
+                                repeat
+                                    wait(0.1)
+                                    if Screen and ImageLabel then
+                                        ImageLabel.ImageColor3 = Screen.Color
+                                    end
+                                until ImageLabel == nil or not ImageLabel:IsDescendantOf(game)
+                            end)
+                        end
+                    end
+                end
+            end
+        end
+    end)
+end
+
+function reloadnameESP()
+	local Players = game:GetService("Players")
+
+-- Function to create the BillboardGui
+local function addNameBillboard(player)
+	if player == Players.LocalPlayer then return end
+
+	local function onCharacterAdded(character)
+		local head = character:WaitForChild("Head", 5)
+		if not head then return end
+
+		if head:FindFirstChild("BillboardGui") and not nametoggle then
+			head.BillboardGui:remove()
+			return
+		end
+
+		if nametoggle and not head:FindFirstChild("BillboardGui") then
+			local billboard = Instance.new("BillboardGui")
+			billboard.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+			billboard.Active = true
+			billboard.AlwaysOnTop = true
+			billboard.LightInfluence = 1.000
+			billboard.Size = UDim2.new(0, 60, 0, 20)
+			billboard.StudsOffset = Vector3.new(0, 1, 0)
+			billboard.Parent = head
+
+			local label = Instance.new("TextLabel")
+			label.Parent = billboard
+			label.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+			label.BackgroundTransparency = 1.000
+			label.BorderSizePixel = 0
+			label.Size = UDim2.new(1, 0, 1, 0)
+			label.Font = Enum.Font.GothamBold
+			label.Text = player.Name
+			label.TextColor3 = Color3.fromRGB(0, 255, 0)
+			label.TextScaled = false
+			label.TextSize = 10
+			label.TextWrapped = true
+			label.Name = "nameText"
+
+			-- Beast check loop
+			spawn(function()
+				repeat
+					wait(0.1)
+					if player == GetBeast() then
+					    label.Text = "|| "..player.Name.." ||\n|| BEAST ||"
+						label.TextColor3 = beastcolor
+					else
+					    label.Text = "|| "..player.Name.." ||\n|| SURVIVOR ||"
+						label.TextColor3 = survivorcolor
+					end
+				until not head or not head.Parent
+			end)
+		end
+	end
+
+	-- Attach to character
+	if player.Character then
+		onCharacterAdded(player.Character)
+	end
+	player.CharacterAdded:Connect(onCharacterAdded)
+end
+
+-- Run for existing players
+for _, player in ipairs(Players:GetPlayers()) do
+	addNameBillboard(player)
+end
+
+-- Run for new players
+Players.PlayerAdded:Connect(function(player)
+	addNameBillboard(player)
+end)
+end
+
+function outlineESP()
+	local Players = game:GetService("Players")
+
+-- Function to add Outline to a player's character
+local function addHighlight(player)
+	if player == Players.LocalPlayer then return end
+
+	local function onCharacterAdded(character)
+		local existingHighlight = character:FindFirstChild("Outline")
+
+		-- If outlines are off, remove existing highlight
+		if existingHighlight and not outlinetoggle then
+			existingHighlight:Destroy()
+			return
+		end
+
+		-- If outlines are on, add highlight if it doesn't exist
+		if outlinetoggle and not existingHighlight then
+			local highlight = Instance.new("Highlight")
+			highlight.Name = "Outline"
+			highlight.Enabled = true
+			highlight.FillTransparency = 1
+			highlight.OutlineTransparency = 0
+			highlight.Parent = character
+
+			spawn(function()
+				repeat
+					wait(0.1)
+					if player == GetBeast() then
+						highlight.FillColor = beastcolor
+						highlight.OutlineColor = beastoutline
+					else
+						highlight.FillColor = survivorcolor
+						highlight.OutlineColor = survivoroutline
+					end
+				until highlight == nil or not highlight:IsDescendantOf(character)
+			end)
+		end
+	end
+
+	-- Handle current character (if loaded)
+	if player.Character then
+		onCharacterAdded(player.Character)
+	end
+
+	-- Connect to future characters
+	player.CharacterAdded:Connect(onCharacterAdded)
+end
+
+-- Add to existing players
+for _, player in ipairs(Players:GetPlayers()) do
+	addHighlight(player)
+end
+
+-- Handle new players joining
+Players.PlayerAdded:Connect(addHighlight)
+end
+
+function getBeast()
+	local player = game.Players:GetChildren()
+	for i=1, #player do
+		local character = player[i].Character
+		if player[i]:findFirstChild("TempPlayerStatsModule"):findFirstChild("IsBeast").Value == true or (character ~= nil and character:findFirstChild("BeastPowers")) then
+			return player[i]
+		end
+	end
+end
+
+function getBestPC()
+    local beast = getBeast()
+    local pcs = {}
+
+    local map = game.ReplicatedStorage.CurrentMap.Value
+    if map ~= nil then
+        local mapstuff = map:getChildren()
+        for i=1,#mapstuff do
+            if mapstuff[i].Name == "ComputerTable" then
+                if mapstuff[i].Screen.BrickColor ~= BrickColor.new("Dark green") then
+                    local magnitude = ((mapstuff[i].Screen.Position - beast.Character:findFirstChild("HumanoidRootPart").Position).magnitude)
+                    table.insert(pcs, {magnitude=magnitude, pc=mapstuff[i]})
+                end
+            end
+        end
+    end
+
+    table.sort(pcs, function(a, b) return a.magnitude > b.magnitude end)
+    return pcs
+end
+
+function isPlayerTyping()
+local hum = game.Players.LocalPlayer.Character:findFirstChildOfClass("Humanoid")
+local anims = hum:GetPlayingAnimationTracks()
+for i=1,#anims do
+if anims[i].Name == "AnimTyping" then
+return true
+end
+end
+return false
+end
+
+spawn(function() -- reload esp when new map
+	game.ReplicatedStorage.CurrentMap.Changed:Connect(function()
+		wait(5) -- hopefully enough time for map to load ;)
+		reloadESP()
+		if pctoggle2 then
+		reloadPCESP()	
+		end
+	end)
+end)
+
+spawn(function() -- reload esp when game becomes active
+	game.ReplicatedStorage.IsGameActive.Changed:Connect(function()
+		reloadESP()
+		if pctoggle2 then
+		reloadPCESP()	
+		end
+	end)
+end)
+
+
+
+spawn(function() --reload esp when character loads/deloads
+	game:GetService("Players").PlayerAdded:Connect(function(player)
+		player.CharacterAdded:Connect(function(character)
+			reloadESP()
+		end)
+		player.CharacterRemoved:Connect(function(character)
+			reloadESP()
+		end)
+	end)
+end)
+
+spawn(function()
+    local old
+    old = hookmetamethod(game, "__namecall", function(self, ...)
+        local args = {...}
+        if getnamecallmethod() == "FireServer" and args[1] == "SetPlayerMinigameResult" and neverfailtoggle then
+            args[2] = true -- force success
+            return old(self, table.unpack(args))
+        end
+        return old(self, ...)
+    end)
+end)
+
+spawn(function()
+    repeat
+        if neverfailhack then
+            game.ReplicatedStorage.RemoteEvent:FireServer("SetPlayerMinigameResult",true)
+        end
+    until not neverfailhack
+end)
+
+spawn(function()
+	while true do
+		wait(0.1)
+		local beast = GetBeast()
+
+		if beast and beast.Character then
+			if slowbeast and beast.Character:FindFirstChild("BeastPowers") then
+				local args = { [1] = "Jumped" }
+				beast.Character.BeastPowers.PowersEvent:FireServer(unpack(args))
+			end
+
+			if removerope and beast.Character:FindFirstChild("Hammer") then
+				local args = { [1] = "HammerClick", [2] = true }
+				beast.Character.Hammer.HammerEvent:FireServer(unpack(args))
+			end
+
+			if forceability and beast.Character:FindFirstChild("BeastPowers") then
+				local args = { [1] = "Input" }
+				beast.Character.BeastPowers.PowersEvent:FireServer(unpack(args))
+			end
+		end
+	end
+end)
