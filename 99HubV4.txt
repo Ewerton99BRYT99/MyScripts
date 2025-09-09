@@ -525,7 +525,7 @@ local Keybind = KeybindsTab:Keybind({
     Desc = "Keybind to open ui",
     Value = "F",
     Callback = function(v)
-        if playertoggle = false then
+        if playertoggle == false then
             playertoggle = true
             reloadESP()
         else
@@ -539,7 +539,7 @@ local Keybind = KeybindsTab:Keybind({
     Desc = "Keybind to open ui",
     Value = "G",
     Callback = function(v)
-        if outlinetoggle = false then
+        if outlinetoggle == false then
             outlinetoggle = true
             outlineESP()
         else
@@ -553,7 +553,7 @@ local Keybind = KeybindsTab:Keybind({
     Desc = "Keybind to open ui",
     Value = "K",
     Callback = function(v)
-        if nametoggle = false then
+        if nametoggle == false then
             nametoggle = true
             reloadnameESP()
         else
@@ -567,7 +567,7 @@ local Keybind = KeybindsTab:Keybind({
     Desc = "Keybind to open ui",
     Value = "G",
     Callback = function(v)
-        if pctoggle = false then
+        if pctoggle == false then
             pctoggle = true
             reloadESP()
         else
@@ -581,7 +581,7 @@ local Keybind = KeybindsTab:Keybind({
     Desc = "Keybind to open ui",
     Value = "G",
     Callback = function(v)
-        if pctoggle2 = false then
+        if pctoggle2 == false then
             pctoggle2 = true
             reloadPCESP()
         else
@@ -595,7 +595,7 @@ local Keybind = KeybindsTab:Keybind({
     Desc = "Keybind to open ui",
     Value = "G",
     Callback = function(v)
-        if podstoggle = false then
+        if podstoggle == false then
             podstoggle = true
             reloadESP()
         else
@@ -609,7 +609,7 @@ local Keybind = KeybindsTab:Keybind({
     Desc = "Keybind to open ui",
     Value = "G",
     Callback = function(v)
-        if neverfailtoggle = false then
+        if neverfailtoggle == false then
             neverfailtoggle = true
         else
             neverfailtoggle = false
@@ -621,7 +621,7 @@ local Keybind = KeybindsTab:Keybind({
     Desc = "Keybind to open ui",
     Value = "G",
     Callback = function(v)
-        if slowbeast = false then
+        if slowbeast == false then
             slowbeast = true
         else
             slowbeast = false
@@ -633,7 +633,7 @@ local Keybind = KeybindsTab:Keybind({
     Desc = "Keybind to open ui",
     Value = "G",
     Callback = function(v)
-        if removerope = false then
+        if removerope == false then
             removerope = true
         else
             removerope = false
@@ -645,7 +645,7 @@ local Keybind = KeybindsTab:Keybind({
     Desc = "Keybind to open ui",
     Value = "G",
     Callback = function(v)
-        if forceability = false then
+        if forceability == false then
             forceability = true
         else
             forceability = false
@@ -1085,4 +1085,5 @@ spawn(function()
 			end
 		end
 	end
+
 end)
