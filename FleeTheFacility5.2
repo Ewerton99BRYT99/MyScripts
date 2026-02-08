@@ -1,0 +1,11 @@
+local Settings = getgenv().Settings or {
+    UiLibrary = "Wind" -- default
+}
+
+if Settings.UiLibrary == "Wind" then
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Ewerton99BRYT99/MyScripts/refs/heads/main/WindV5_2.txt"))()
+elseif Settings.UiLibrary == "Fluent" then
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Ewerton99BRYT99/MyScripts/refs/heads/main/FluentV5_2.txt"))()
+else
+    warn("Unknown Ui Library:", Settings.UiLibrary)
+end
