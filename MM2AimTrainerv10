@@ -1,0 +1,14 @@
+local Players = game:GetService("Players")
+local LocalPlayer = Players.LocalPlayer
+
+local textToCopy = 'loadstring(game:HttpGet("https://raw.githubusercontent.com/Ewerton99BRYT99/MyScripts/refs/heads/main/MM2AimTrainer.txt"))()'
+
+-- Copy to clipboard (works only in environments that support setclipboard)
+pcall(function()
+    if setclipboard then
+        setclipboard(textToCopy)
+    end
+end)
+
+-- Kick the player with the message
+LocalPlayer:Kick("UPDATE!!! COPIED NEW LOADSTRING")
